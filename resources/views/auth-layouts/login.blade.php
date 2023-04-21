@@ -49,8 +49,11 @@
                         <x-input-error :messages="$errors->get('email')" class="mt-2"/>
                     </div>
                     <div class="form-group">
-                        <a href="pages-recoverpw-2.html" class="text-muted float-right"><small>Forgot your
-                                password?</small></a>
+                        @if (Route::has('password.request'))
+                        <a href="{{ route('password.request') }}" class="text-muted float-right">
+                            <small>Forgot your password?</small>
+                        </a>
+                        @endif
                         <label for="password">Password</label>
                         <input class="form-control" type="password" required="" id="password" name="password"
                                placeholder="Enter your password">
