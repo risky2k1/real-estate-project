@@ -1,3 +1,4 @@
+@php use Illuminate\Support\Facades\Auth; @endphp
 <div class="navbar-custom">
     <ul class="list-unstyled topbar-right-menu float-right mb-0">
         <li class="dropdown notification-list">
@@ -5,10 +6,10 @@
                role="button" aria-haspopup="false"
                aria-expanded="false">
                 <span class="account-user-avatar">
-                    <img src="{{asset('assets/images/users/avatar-1.jpg')}}" alt="" class="rounded-circle">
+                    <img src="{{Auth::user()->avatar}}" alt="" class="rounded-circle">
                 </span>
                 <span>
-                    <span class="account-user-name">Dominic Keller</span>
+                    <span class="account-user-name">{{Auth::user()->name}}</span>
                     <span class="account-position">Founder</span>
                 </span>
             </a>
