@@ -17,7 +17,6 @@
     <!-- App css -->
     <link href="{{asset('assets/css/icons.min.css')}}" rel="stylesheet" type="text/css"/>
     <link href="{{asset('assets/css/app-creative.min.css')}}" rel="stylesheet" type="text/css" id="light-style"/>
-    <link href="{{asset('assets/css/app-creative-dark.min.css')}}" rel="stylesheet" type="text/css" id="dark-style"/>
     @stack('css')
 </head>
 
@@ -45,7 +44,7 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="page-title-box">
-                            <h4 class="page-title">Vertical</h4>
+                            <h4 class="page-title">{{$title??''}}</h4>
                         </div>
                     </div>
                 </div>
