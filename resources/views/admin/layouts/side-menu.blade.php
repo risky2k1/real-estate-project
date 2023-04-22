@@ -33,20 +33,7 @@
                 </a>
                 <ul class="side-nav-third-level" >
                     <li>
-                        <a href="javascript: void(0);">Item 1</a>
-                    </li>
-                    <li class="side-nav-item">
-                        <a href="javascript: void(0);" >Item 2
-                            <span class="menu-arrow"></span>
-                        </a>
-                        <ul class="side-nav-forth-level">
-                            <li>
-                                <a href="javascript: void(0);">Item 2.1</a>
-                            </li>
-                            <li>
-                                <a href="javascript: void(0);">Item 2.2</a>
-                            </li>
-                        </ul>
+                        <a href="{{route('admin.roles.index')}}">Roles</a>
                     </li>
                 </ul>
             </li>

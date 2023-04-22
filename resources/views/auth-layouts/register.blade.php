@@ -109,8 +109,11 @@
 
                 <!-- Footer-->
                 <footer class="footer footer-alt">
-                    <p class="text-muted">Already have account? <a href="pages-login-2.html" class="text-muted ml-1"><b>Log
-                                In</b></a></p>
+                    <p class="text-muted">Already have account?
+                        <a href="{{route('login')}}" class="text-muted ml-1">
+                            <b>Log In</b>
+                        </a>
+                    </p>
                 </footer>
 
             </div> <!-- end .card-body -->
@@ -122,8 +125,10 @@
     <div class="auth-fluid-right text-center">
         <div class="auth-user-testimonial">
             <h2 class="mb-3">I love the color!</h2>
-            <p class="lead"><i class="mdi mdi-format-quote-open"></i> It's a elegent templete. I love it very much! . <i
-                        class="mdi mdi-format-quote-close"></i>
+            <p class="lead">
+                <i class="mdi mdi-format-quote-open"></i>
+                It's a elegant template. I love it very much! .
+                <i class="mdi mdi-format-quote-close"></i>
             </p>
             <p>
                 - Hyper Admin User

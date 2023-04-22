@@ -10,7 +10,10 @@
                 <div class="card-body">
                     <div class="row mb-2">
                         <div class="col-sm-4">
-                        
+                            <a href="{{route('admin.roles.create')}}" class="btn btn-danger mb-2"><i
+                                        class="mdi mdi-plus-circle mr-2"></i> Add Roles</a>
+                            <a href="{{route('admin.roles.create.permissions')}}" class="btn btn-danger mb-2"><i
+                                        class="mdi mdi-plus-circle mr-2"></i> Add Permissions</a>
                         </div>
                         <div class="col-sm-8">
                             <div class="text-sm-right">
@@ -31,7 +34,7 @@
                                 <div class="col-sm-12 col-md-6">
                                     <div id="products-datatable_filter" class="dataTables_filter"><label>Search:<input
                                                     type="search" class="form-control form-control-sm" placeholder=""
-                                                    ></label></div>
+                                            ></label></div>
                                 </div>
                             </div>
                             <div class="row">
@@ -44,11 +47,11 @@
                                             <th rowspan="1" colspan="1" style="width: 20px">
                                                 #
                                             </th>
-                                            <th class="all" tabindex="0" 
-                                                rowspan="1" colspan="1" style="width: 381.8px;">User info
+                                            <th class="all" tabindex="0"
+                                                rowspan="1" colspan="1" style="width: 381.8px;">Role name
                                             </th>
-                                            <th class="" tabindex="0"
-                                                rowspan="1" colspan="1" style="width: 87.8px;">Role
+                                            <th class="all" tabindex="0"
+                                                rowspan="1" colspan="1" style="width: 381.8px;">Permissions
                                             </th>
                                             <th class="" tabindex="0"
                                                 rowspan="1" colspan="1" style="width: 143.8px;">Created date
@@ -58,38 +61,37 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        @foreach($users as $user)
-                                        <tr role="row" class="odd">
-                                            <td class="dt-checkboxes-cell" tabindex="0">
-                                                {{$user->id}}
-                                            </td>
-                                            <td class="sorting_1">
-                                                <img src="{{$user->avatar}}" alt="contact-img"
-                                                     title="contact-img" class="rounded mr-3" height="48">
-                                                <p class="m-0 d-inline-block align-middle font-16">
-                                                    <a href="apps-ecommerce-products-details.html" class="text-body">{{$user->name}}</a>
-                                                    <br>
-                                                    {{$user->email}}
-                                                </p>
-                                            </td>
-                                            <td>
-                                                <span class="badge badge-success">{{$user->roles->pluck('name')->implode(',')}}</span>
-                                            </td>
-                                            <td>
-                                                {{$user->created_at}}
-                                            </td>
-                                            <td class="table-action">
-                                                <a href="{{route('admin.users.show',$user)}}" class="action-icon">
-                                                    <i class="mdi mdi-eye"></i>
-                                                </a>
-                                                <a href="javascript:void(0);" class="action-icon">
-                                                    <i class="mdi mdi-square-edit-outline"></i>
-                                                </a>
-                                                <a href="javascript:void(0);" class="action-icon">
-                                                    <i class="mdi mdi-delete"></i>
-                                                </a>
-                                            </td>
-                                        </tr>
+                                        @foreach($roles as $role)
+                                            <tr role="row" class="odd">
+                                                <td class="dt-checkboxes-cell" tabindex="0">
+                                                    {{$role->id}}
+                                                </td>
+                                                <td>
+                                                    {{$role->name}}
+                                                </td>
+                                                <td>
+                                                    @if($role->name=='Super Admin')
+                                                        <span class="badge badge-success">All permissions</span>
+                                                    @endif
+                                                    @foreach($role->permissions->pluck('name')->toArray() as $permission)
+                                                    <span class="badge badge-success">{{$permission}}</span>
+                                                    @endforeach
+                                                </td>
+                                                <td>
+                                                    {{$role->created_at}}
+                                                </td>
+                                                <td class="table-action">
+                                                    <a href="{{route('admin.roles.edit',$role)}}" class="action-icon">
+                                                        <i class="mdi mdi-eye"></i>
+                                                    </a>
+                                                    <a href="javascript:void(0);" class="action-icon">
+                                                        <i class="mdi mdi-square-edit-outline"></i>
+                                                    </a>
+                                                    <a href="javascript:void(0);" class="action-icon">
+                                                        <i class="mdi mdi-delete"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
                                         @endforeach
                                         </tbody>
                                     </table>
@@ -101,7 +103,7 @@
                                 <div class="col-sm-12 col-md-7">
                                     <div>
                                         <ul class="pagination pagination-rounded">
-                                           {{$users->links()}}
+{{--                                            {{$roles->links()}}--}}
                                         </ul>
                                     </div>
                                 </div>
@@ -119,5 +121,4 @@
     <script src="{{asset('assets/js/vendor/dataTables.bootstrap4.js')}}"></script>
     <script src="{{asset('assets/js/vendor/dataTables.responsive.min.js')}}"></script>
     <script src="{{asset('assets/js/vendor/responsive.bootstrap4.min.js')}}"></script>
-    <script src="{{asset('assets/js/vendor/dataTables.checkboxes.min.js')}}"></script>
 @endpush

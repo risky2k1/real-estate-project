@@ -50,9 +50,9 @@
                     </div>
                     <div class="form-group">
                         @if (Route::has('password.request'))
-                        <a href="{{ route('password.request') }}" class="text-muted float-right">
-                            <small>Forgot your password?</small>
-                        </a>
+                            <a href="{{ route('password.request') }}" class="text-muted float-right">
+                                <small>Forgot your password?</small>
+                            </a>
                         @endif
                         <label for="password">Password</label>
                         <input class="form-control" type="password" required="" id="password" name="password"
@@ -97,10 +97,12 @@
 
                 <!-- Footer-->
                 <footer class="footer footer-alt">
-                    <p class="text-muted">Don't have an account? <a href="pages-register-2.html"
-                                                                    class="text-muted ml-1"><b>Sign Up</b></a></p>
+                    <p class="text-muted">Don't have an account?
+                        <a href="{{route('register')}}" class="text-muted ml-1">
+                            <b>Sign Up</b>
+                        </a>
+                    </p>
                 </footer>
-
             </div> <!-- end .card-body -->
         </div> <!-- end .align-items-center.d-flex.h-100-->
     </div>
@@ -110,8 +112,10 @@
     <div class="auth-fluid-right text-center">
         <div class="auth-user-testimonial">
             <h2 class="mb-3">I love the color!</h2>
-            <p class="lead"><i class="mdi mdi-format-quote-open"></i> It's a elegent templete. I love it very much! . <i
-                        class="mdi mdi-format-quote-close"></i>
+            <p class="lead">
+                <i class="mdi mdi-format-quote-open"></i>
+                It's a elegent templete. I love it very much! .
+                <i class="mdi mdi-format-quote-close"></i>
             </p>
             <p>
                 - Hyper Admin User
