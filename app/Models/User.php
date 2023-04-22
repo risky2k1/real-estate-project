@@ -56,6 +56,5 @@ class User extends Authenticatable
         return Attribute::make(
                 get: fn () => (new \Laravolt\Avatar\Avatar)->create($this->name)->toBase64(),
         );
-
     }
 }
