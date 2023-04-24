@@ -190,7 +190,7 @@
                         <!-- end about me section content -->
 
                         <div class="tab-pane show active" id="settings">
-                            <form action="{{route('admin.users.update')}}" method="post">
+                            <form action="{{route('admin.users.update',$user)}}" method="post">
                                 @csrf
                                 @method('patch')
                                 <h5 class="mb-4 text-uppercase">
