@@ -29,7 +29,7 @@ class Property extends Model
 
     public function images()
     {
-        return $this->hasMany(Image::class,'id','properties');
+        return $this->hasMany(Image::class, 'id', 'properties');
     }
 
 

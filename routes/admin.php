@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', fn() => view('admin.layouts.index'));
 
 
-Route::middleware(['auth','admin'])->group(function () {
+Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
     Route::prefix('users')->name('users.')->group(function () {
         Route::get('/', [UserController::class, 'index'])->name('index');
@@ -26,8 +26,8 @@ Route::middleware(['auth','admin'])->group(function () {
         Route::post('/permission', [RoleController::class, 'storePermissions'])->name('store.permissions');
         Route::get('/{role}/edit', [RoleController::class, 'edit'])->name('edit');
     });
-    Route::prefix('properties')->name('properties.')->group(function (){
-       Route::get('/',[PropertyController::class,'index'])->name('index');
+    Route::prefix('properties')->name('properties.')->group(function () {
+        Route::get('/', [PropertyController::class, 'index'])->name('index');
         Route::get('/create', [PropertyController::class, 'create'])->name('create');
         Route::post('/', [PropertyController::class, 'store'])->name('store');
     });

@@ -14,6 +14,6 @@ class Image extends Model
             'path',
             'user_id',
             'type',
-        'property_id',
+            'property_id',
     ];
 }

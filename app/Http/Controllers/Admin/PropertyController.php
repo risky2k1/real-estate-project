@@ -41,31 +41,31 @@ class PropertyController extends Controller
     public function store(PropertyStoreRequest $request)
     {
         $property = Property::create([
-                'name'=>$request->input('name'),
-                'slug'=>$request->input('slug'),
-                'description'=>$request->input('description'),
-                'property_type'=>$request->input('property_type'),
-                'property_status'=>$request->input('property_status'),
-                'property_price'=>$request->input('price'),
-                'property_price_per_meter'=>$request->input('price_per_meter'),
-                'longitude'=>$request->input('longitude'),
-                'latitude'=>$request->input('latitude'),
-                'area'=>$request->input('area'),
-                'rooms'=>$request->input('rooms'),
-                'bath_rooms'=>$request->input('bath_rooms'),
-                'bed_rooms'=>$request->input('bed_rooms'),
-                'furnished'=>$request->input('furnish'),
-                'is_active'=>$request->input('active'),
+                'name' => $request->input('name'),
+                'slug' => $request->input('slug'),
+                'description' => $request->input('description'),
+                'property_type' => $request->input('property_type'),
+                'property_status' => $request->input('property_status'),
+                'property_price' => $request->input('price'),
+                'property_price_per_meter' => $request->input('price_per_meter'),
+                'longitude' => $request->input('longitude'),
+                'latitude' => $request->input('latitude'),
+                'area' => $request->input('area'),
+                'rooms' => $request->input('rooms'),
+                'bath_rooms' => $request->input('bath_rooms'),
+                'bed_rooms' => $request->input('bed_rooms'),
+                'furnished' => $request->input('furnish'),
+                'is_active' => $request->input('active'),
         ]);
-        if ($request->hasFile('image')){
-            foreach ($request->file('image') as $image){
+        if ($request->hasFile('image')) {
+            foreach ($request->file('image') as $image) {
                 $path = Storage::disk('local')->put('properties', $image);
                 Image::create([
-                    'name'=>$request->image[0]->getClientOriginalName(),
-                    'path' => $path,
-                    'user_id'=>Auth::user()->id,
-                    'type'=>'1',
-                    'property_id'=>$property->id,
+                        'name' => $request->image[0]->getClientOriginalName(),
+                        'path' => $path,
+                        'user_id' => Auth::user()->id,
+                        'type' => '1',
+                        'property_id' => $property->id,
                 ]);
             }
         }

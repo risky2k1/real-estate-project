@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -13,16 +12,16 @@ return new class extends Migration
     {
         Schema::create('properties', function (Blueprint $table) {
             $table->id();
-            $table->string('name','255');
-            $table->string('slug','255');
+            $table->string('name', '255');
+            $table->string('slug', '255');
             $table->text('description');
             $table->smallInteger('property_type');//type+status = null, not setted
             $table->smallInteger('property_status');
-            $table->decimal('property_price','20','2');
-            $table->decimal('property_price_per_meter','20','2');
-            $table->string('longitude','255');
-            $table->string('latitude','255');
-            $table->float('area','10','2');
+            $table->decimal('property_price', '20', '2');
+            $table->decimal('property_price_per_meter', '20', '2');
+            $table->string('longitude', '255');
+            $table->string('latitude', '255');
+            $table->float('area', '10', '2');
             $table->integer('rooms');
             $table->integer('bath_rooms');
             $table->integer('bed_rooms');
