@@ -2,6 +2,7 @@
 @push('css')
     <script src='https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js'></script>
     <link href='https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css' rel='stylesheet'/>
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 @endpush
 
 @section('content')
@@ -15,73 +16,42 @@
                                 <label for="name">Name</label>
                                 <input type="text" id="name" name="name" class="form-control" placeholder="Enter project name">
                             </div>
+                            <div class="form-group">
+                                <label for="slug">Slug</label>
+                                <input type="text" id="slug" name="slug" class="form-control" placeholder="Enter project name">
+                            </div>
 
                             <div class="form-group">
-                                <label for="project-overview">Overview</label>
-                                <textarea class="form-control" id="project-overview" rows="5" placeholder="Enter some brief about project.."></textarea>
+                                <label for="summernote">Description</label>
+                                <textarea class="form-control" id="summernote" name="description"></textarea>
                             </div>
 
                             <!-- Date View -->
                             <div class="form-group">
-                                <label>Start Date</label>
-                                <input type="text" class="form-control" data-provide="datepicker" data-date-format="d-M-yyyy" data-date-autoclose="true">
+                                <label for="price">Price</label>
+                                <input type="text" class="form-control" id="price" name="price">
                             </div>
 
                             <div class="form-group">
-                                <label for="project-budget">Budget</label>
-                                <input type="text" id="project-budget" class="form-control" placeholder="Enter project budget">
+                                <label for="pricepm">Price per meter</label>
+                                <input type="text" class="form-control" id="pricepm" name="price_per_meter">
                             </div>
 
-                            <div class="form-group mb-0">
-                                <label for="project-overview">Team Members</label>
-
-                                <select class="form-control select2" data-toggle="select2">
-                                    <option>Select</option>
-                                    <option value="AZ">Mary Scott</option>
-                                    <option value="CO">Holly Campbell</option>
-                                    <option value="ID">Beatrice Mills</option>
-                                    <option value="MT">Melinda Gills</option>
-                                    <option value="NE">Linda Garza</option>
-                                    <option value="NM">Randy Ortez</option>
-                                    <option value="ND">Lorene Block</option>
-                                    <option value="UT">Mike Baker</option>
-                                </select>
-
-                                <div class="mt-2">
-                                    <a href="javascript:void(0);" data-toggle="tooltip" data-placement="top" title="" data-original-title="Mat Helme" class="d-inline-block">
-                                        <img src="assets/images/users/avatar-6.jpg" class="rounded-circle avatar-xs" alt="friend">
-                                    </a>
-
-                                    <a href="javascript:void(0);" data-toggle="tooltip" data-placement="top" title="" data-original-title="Michael Zenaty" class="d-inline-block">
-                                        <img src="assets/images/users/avatar-7.jpg" class="rounded-circle avatar-xs" alt="friend">
-                                    </a>
-
-                                    <a href="javascript:void(0);" data-toggle="tooltip" data-placement="top" title="" data-original-title="James Anderson" class="d-inline-block">
-                                        <img src="assets/images/users/avatar-8.jpg" class="rounded-circle avatar-xs" alt="friend">
-                                    </a>
-
-                                    <a href="javascript:void(0);" data-toggle="tooltip" data-placement="top" title="" data-original-title="Lorene Block" class="d-inline-block">
-                                        <img src="assets/images/users/avatar-4.jpg" class="rounded-circle avatar-xs" alt="friend">
-                                    </a>
-
-                                    <a href="javascript:void(0);" data-toggle="tooltip" data-placement="top" title="" data-original-title="Mike Baker" class="d-inline-block">
-                                        <img src="assets/images/users/avatar-5.jpg" class="rounded-circle avatar-xs" alt="friend">
-                                    </a>
-                                </div>
-
+                            <div class="form-group">
+                                <label for="area">Area</label>
+                                <input type="text" class="form-control" id="area" name="area">
                             </div>
-
                         </div> <!-- end col-->
 
                         <div class="col-xl-6">
                             <div class="form-group mt-3 mt-xl-0">
-                                <label for="projectname" class="mb-0">Avatar</label>
+                                <label for="projectname" class="mb-0">Images</label>
                                 <p class="text-muted font-14">Recommended thumbnail size 800x400 (px).</p>
 
                                 <form action="/" method="post" class="dropzone" id="myAwesomeDropzone" data-plugin="dropzone" data-previews-container="#file-previews"
                                       data-upload-preview-template="#uploadPreviewTemplate">
                                     <div class="fallback">
-                                        <input name="file" type="file" />
+                                        <input name="file" type="file"/>
                                     </div>
 
                                     <div class="dz-message needsclick">
@@ -119,11 +89,68 @@
                             </div>
 
                             <!-- Date View -->
-                            <div class="form-group">
-                                <label>Due Date</label>
-                                <input type="text" class="form-control" data-provide="datepicker" data-date-format="d-M-yyyy" data-date-autoclose="true">
+                            <div class="row">
+                                <div class="form-group col-4">
+                                    <label for="rooms">Rooms</label>
+                                    <input type="number" class="form-control" id="rooms" name="rooms">
+                                </div>
+                                <div class="form-group col-4">
+                                    <label for="bath_rooms">Bath rooms</label>
+                                    <input type="number" class="form-control" id="bath_rooms" name="bath_rooms">
+                                </div>
+                                <div class="form-group col-4">
+                                    <label for="bed_rooms">Bed rooms</label>
+                                    <input type="number" class="form-control" id="bed_rooms" name="bed_rooms">
+                                </div>
                             </div>
+                            <div class="form-group">
+                                <div class="mt-2">
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="checkbox" id="furnish" name="furnish" class="custom-control-input">
+                                        <label class="custom-control-label" for="furnish">Furnished</label>
+                                    </div>
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="checkbox" id="active" name="active" class="custom-control-input">
+                                        <label class="custom-control-label" for="active">Active</label>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="property_type">Property Type</label>
+                                <select class="select2 form-control select2-multiple" id="property_type" name="property_type" data-toggle="select2" multiple="multiple" data-placeholder="Choose ...">
+                                    <optgroup label="Property Types">
+                                        <option value="AK">Alaska</option>
+                                        <option value="HI">Hawaii</option>
+                                        <option value="HI">Hawaii</option>
+                                        <option value="HI">Hawaii</option>
+                                    </optgroup>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="example-select">Input Select</label>
+                                <select class="form-control" id="example-select">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                </select>
+                            </div>
+
                         </div> <!-- end col-->
+
+                        <div class="col-xl-12 form-group">
+                            <div class="form-control">
+                                <label for="longitude">Longitude</label>
+                                <input type="text" id="longitude" name="longitude">
+                                <label for="latitude">Latitude</label>
+                                <input type="text" id="latitude" name="latitude">
+                            </div>
+                            <div id='map' style='width: 1400px; height: 300px;'></div>
+                        </div>
                     </div>
                     <!-- end row -->
 
@@ -134,21 +161,54 @@
 @endsection
 
 @push('js')
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
     <script src="{{asset('assets/js/vendor/dropzone.min.js')}}"></script>
     <!-- init js -->
     <script src="{{asset('assets/js/ui/component.fileupload.js')}}"></script>
     <script>
+        $(document).ready(function () {
+            $('#summernote').summernote();
+        });
+    </script>
+    <script>
+        const longitudeInput = document.getElementById('longitude');
+        const latitudeInput = document.getElementById('latitude');
+
         mapboxgl.accessToken = 'pk.eyJ1IjoidHVhbnRhbXR1b25nIiwiYSI6ImNsZ3lpd3Y4ODBhMzEzbHBlejh1Zjc3eGYifQ.i6qdKYjYC6bof7_KDOfGQA';
         const map = new mapboxgl.Map({
             container: 'map', // container ID
             style: 'mapbox://styles/mapbox/streets-v12', // style URL
-            center: [-74.5, 40], // starting position [lng, lat]
-            zoom: 9, // starting zoom
+            center: [105.78938247915548,20.97631900240898], // starting position [lng, lat]20.97631900240898, 105.78938247915548
+            zoom: 16, // starting zoom
         });
         const marker = new mapboxgl.Marker({
             color: "#FFFFFF",
             draggable: true
-        }).setLngLat([-74.5, 40])
+        }).setLngLat([105.78938247915548,20.97631900240898])
             .addTo(map);
+
+        let timerId = null;
+
+        longitudeInput.addEventListener('input', updateMapCenterWithDelay);
+        latitudeInput.addEventListener('input', updateMapCenterWithDelay);
+
+        function updateMapCenterWithDelay() {
+            // Clear any previous timer
+            if (timerId) {
+                clearTimeout(timerId);
+            }
+
+            // Set up a new timer to update the map after a 500ms delay
+            timerId = setTimeout(updateMapCenter, 1000);
+        }
+
+        function updateMapCenter() {
+            const longitude = parseFloat(longitudeInput.value);
+            const latitude = parseFloat(latitudeInput.value);
+
+            // Update the map center and marker location
+            map.setCenter([longitude, latitude]);
+            marker.setLngLat([longitude, latitude]);
+        }
     </script>
 @endpush
