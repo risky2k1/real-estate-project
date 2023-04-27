@@ -30,12 +30,7 @@
 
                                 <div class="form-group">
                                     <label for="slug">Slug</label>
-                                    <input type="text" id="slug" name="slug" class="form-control" placeholder="Enter project name">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="summernote">Description</label>
-                                    <textarea class="form-control" id="summernote" name="description"></textarea>
+                                    <input type="text" id="slug" name="slug" class="form-control" placeholder="Enter project name" readonly>
                                 </div>
 
                                 <div class="form-group">
@@ -120,6 +115,13 @@
                             </div> <!-- end col-->
 
                             <div class="col-xl-12 form-group">
+                                <div class="form-group">
+                                    <label for="summernote">Description</label>
+                                    <textarea class="form-control" id="summernote" name="description"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-12 form-group">
                                 <label for="">Position</label>
                                 <div class="form-control">
                                     <label for="longitude">Longitude</label>
@@ -145,7 +147,11 @@
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
     <script>
         $(document).ready(function () {
-            $('#summernote').summernote();
+            $('#summernote').summernote({
+                placeholder: 'Description....',
+                tabsize: 2,
+                height: 200
+            });
         });
     </script>
     <script>
@@ -191,8 +197,8 @@
         }
     </script>
     <script>
-        $(document).ready(function() {
-            $('#image').on('change', function() {
+        $(document).ready(function () {
+            $('#image').on('change', function () {
                 $('#preview').empty(); // Clear previous preview
 
                 const files = this.files;
@@ -200,7 +206,7 @@
                     const file = files[i];
 
                     const reader = new FileReader();
-                    reader.onload = function(e) {
+                    reader.onload = function (e) {
                         const img = $('<img>').attr('src', e.target.result);
                         img.css({
                             'width': '128px',
@@ -214,8 +220,8 @@
         });
     </script>
     <script>
-        $(document).ready(function() {
-            $('#name').on('keyup', function() {
+        $(document).ready(function () {
+            $('#name').on('keyup', function () {
                 const name = $(this).val();
                 const slug = slugify(name);
                 $('#slug').val(slug);
