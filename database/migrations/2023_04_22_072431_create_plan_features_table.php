@@ -6,8 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      *
@@ -31,7 +30,7 @@ return new class extends Migration
             // Indexes
             $table->unique(['tag', 'plan_id']);
             $table->foreign('plan_id')->references('id')->on(config('subby.tables.plans'))
-                ->onDelete('cascade')->onUpdate('cascade');
+                    ->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

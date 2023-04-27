@@ -23,14 +23,6 @@ class RoleController extends Controller
         ]);
     }
 
-    public function create()
-    {
-        $permissions = Permission::all();
-        return \view('admin.pages.roles.create', [
-                'permissions' => $permissions,
-        ]);
-    }
-
     public function createPermissions()
     {
         return \view('admin.pages.roles.create-permission');
@@ -45,6 +37,14 @@ class RoleController extends Controller
                 'name' => $request->permission,
         ]);
         return redirect()->route('admin.roles.index');
+    }
+
+    public function create()
+    {
+        $permissions = Permission::all();
+        return \view('admin.pages.roles.create', [
+                'permissions' => $permissions,
+        ]);
     }
 
     public function store(Request $request)

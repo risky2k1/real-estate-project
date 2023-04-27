@@ -47,7 +47,7 @@
                         <label for="email">Email address</label>
                         <input class="form-control" type="email" id="email" name="email" required=""
                                placeholder="Enter your email">
-                        <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                        <x-input-error :messages="$errors->get('email')" class="mt-2"/>
                     </div>
                     <div class="form-group mb-0 text-center">
                         <button class="btn btn-primary btn-block" type="submit"><i class="mdi mdi-lock-reset"></i> Reset

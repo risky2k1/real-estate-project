@@ -17,7 +17,7 @@ class ProfileController extends Controller
     public function edit(Request $request): View
     {
         return view('profile.edit', [
-            'user' => $request->user(),
+                'user' => $request->user(),
         ]);
     }
 
@@ -43,7 +43,7 @@ class ProfileController extends Controller
     public function destroy(Request $request): RedirectResponse
     {
         $request->validateWithBag('userDeletion', [
-            'password' => ['required', 'current_password'],
+                'password' => ['required', 'current_password'],
         ]);
 
         $user = $request->user();

@@ -11,7 +11,8 @@
                                 <label for="role">Add a new role</label>
                                 <input type="text" name="role_name" id="role" class="form-control">
                                 <label for="permission" class="mt-2">Select permission for this role:</label>
-                                <select class="select2 form-control select2-multiple" id="permission" name="permission[]" data-toggle="select2" multiple="multiple" data-placeholder="Choose permissions...">
+                                <select class="select2 form-control select2-multiple" id="permission" name="permission[]" data-toggle="select2" multiple="multiple"
+                                        data-placeholder="Choose permissions...">
                                     @foreach($permissions->pluck('name')->toArray() as $permission)
                                         <option value="{{$permission}}">{{$permission}}</option>
                                     @endforeach

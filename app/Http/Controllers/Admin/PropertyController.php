@@ -3,29 +3,24 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
+use App\Models\Property;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 
-
-class UserController extends Controller
+class PropertyController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function __construct()
     {
-        $table = ucfirst((new User())->getTable());
+        $table = 'Property';
         View::share('title', $table);
     }
 
     public function index()
     {
-        $users = User::orderBy('id', 'asc')
-                ->paginate(10)->withQueryString();
-        return view('admin.pages.users.index', [
-                'users' => $users,
-        ]);
+        return view('admin.pages.properties.index');
     }
 
     /**
@@ -33,7 +28,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.pages.properties.create');
     }
 
     /**
@@ -47,17 +42,15 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(User $user)
+    public function show(Property $property)
     {
-        return \view('admin.pages.users.details', [
-                'user' => $user,
-        ]);
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Property $property)
     {
         //
     }
@@ -65,18 +58,15 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, Property $property)
     {
-        $request->validate([
-                'email' => 'unique:users',
-        ]);
-        $user->update($request->all());
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Property $property)
     {
         //
     }
