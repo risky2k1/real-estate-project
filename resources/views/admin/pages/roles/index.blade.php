@@ -1,7 +1,7 @@
 @extends('admin.layouts.index')
 @push('css')
-    <link href="{{asset('assets/css/vendor/dataTables.bootstrap4.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{asset('assets/css/vendor/responsive.bootstrap4.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('assets/css/vendor/dataTables.bootstrap4.css')}}" rel="stylesheet" type="text/css"/>
+    <link href="{{asset('assets/css/vendor/responsive.bootstrap4.css')}}" rel="stylesheet" type="text/css"/>
 @endpush
 @section('content')
     <div class="row">
@@ -74,7 +74,7 @@
                                                         <span class="badge badge-success">All permissions</span>
                                                     @endif
                                                     @foreach($role->permissions->pluck('name')->toArray() as $permission)
-                                                    <span class="badge badge-success">{{$permission}}</span>
+                                                        <span class="badge badge-success">{{$permission}}</span>
                                                     @endforeach
                                                 </td>
                                                 <td>
@@ -103,7 +103,7 @@
                                 <div class="col-sm-12 col-md-7">
                                     <div>
                                         <ul class="pagination pagination-rounded">
-{{--                                            {{$roles->links()}}--}}
+                                            {{--                                            {{$roles->links()}}--}}
                                         </ul>
                                     </div>
                                 </div>

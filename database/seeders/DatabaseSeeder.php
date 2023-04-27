@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
     {
         app()[PermissionRegistrar::class]->forgetCachedPermissions();
 
-        for ($i=1;$i<=10;$i++){
+        for ($i = 1; $i <= 10; $i++) {
             User::create([
                     'name' => 'admin',
                     'email' => "admin.$i.@gmail.com",
@@ -48,8 +48,7 @@ class DatabaseSeeder extends Seeder
 //                'password' => Hash::make(config('auth.administrator.password')),
 //        ]);
 //        $admin->assignRole($role1);
-        foreach ($users as $user)
-        {
+        foreach ($users as $user) {
             $user->assignRole($role2) || $user->assignRole($role3);
         }
 

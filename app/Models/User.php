@@ -4,12 +4,13 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Bpuig\Subby\Traits\HasSubscriptions;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Laravolt\Avatar\Avatar;
 use Spatie\Permission\Traits\HasRoles;
-use Illuminate\Database\Eloquent\Casts\Attribute;
 
 /**
  * @method static paginate()
@@ -26,10 +27,10 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
-        'email',
-        'password',
-        'phone',
+            'name',
+            'email',
+            'password',
+            'phone',
     ];
 
     /**
@@ -38,8 +39,8 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $hidden = [
-        'password',
-        'remember_token',
+            'password',
+            'remember_token',
     ];
 
     /**
@@ -48,13 +49,13 @@ class User extends Authenticatable
      * @var array<string, string>
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
+            'email_verified_at' => 'datetime',
     ];
 
     protected function avatar(): Attribute
     {
         return Attribute::make(
-                get: fn () => (new \Laravolt\Avatar\Avatar)->create($this->name)->toBase64(),
+                get: fn() => (new Avatar)->create($this->name)->toBase64(),
         );
     }
 }

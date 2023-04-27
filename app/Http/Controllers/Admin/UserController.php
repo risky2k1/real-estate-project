@@ -68,7 +68,7 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         $request->validate([
-            'email'=>'unique:users',
+                'email' => 'unique:users',
         ]);
         $user->update($request->all());
     }

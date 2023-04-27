@@ -8,7 +8,7 @@
         </a>
     </li>
     <li class="side-nav-item">
-        <a href="#" class="side-nav-link" >
+        <a href="#" class="side-nav-link">
             <i class="uil-folder-plus"></i>
             <span> User Management </span>
             <span class="menu-arrow"></span>
@@ -28,10 +28,10 @@
                 </ul>
             </li>
             <li class="side-nav-item">
-                <a href="javascript: void(0);" >Roles and Permissions
+                <a href="javascript: void(0);">Roles and Permissions
                     <span class="menu-arrow"></span>
                 </a>
-                <ul class="side-nav-third-level" >
+                <ul class="side-nav-third-level">
                     <li>
                         <a href="{{route('admin.roles.index')}}">Roles</a>
                     </li>
@@ -52,7 +52,7 @@
         </a>
     </li>
     <li class="side-nav-item">
-        <a href="#" class="side-nav-link" >
+        <a href="#" class="side-nav-link">
             <i class="uil-folder-plus"></i>
             <span> Plans Management </span>
             <span class="menu-arrow"></span>
