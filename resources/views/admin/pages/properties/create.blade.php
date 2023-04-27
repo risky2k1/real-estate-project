@@ -111,8 +111,10 @@
 
                                 <div class="form-group">
                                     <label for="image">Images</label>
-                                    <input type="file" name="image[]" multiple>
+                                    <input type="file" id="image" name="image[]" multiple>
                                 </div>
+
+                                <div id="preview"></div>
 
 
                             </div> <!-- end col-->
@@ -189,5 +191,28 @@
             map.setCenter([longitude, latitude]);
             marker.setLngLat([longitude, latitude]);
         }
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('#image').on('change', function() {
+                $('#preview').empty(); // Clear previous preview
+
+                const files = this.files;
+                for (let i = 0; i < files.length; i++) {
+                    const file = files[i];
+
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        const img = $('<img>').attr('src', e.target.result);
+                        img.css({
+                            'width': '128px',
+                            'height': '128px'
+                        });
+                        $('#preview').append(img);
+                    }
+                    reader.readAsDataURL(file);
+                }
+            });
+        });
     </script>
 @endpush
