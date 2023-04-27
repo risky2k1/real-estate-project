@@ -44,8 +44,8 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="pricepm">Price per meter</label>
-                                    <input type="text" class="form-control" id="pricepm" name="price_per_meter">
+                                    <label for="price_per_meter">Price per meter</label>
+                                    <input type="text" class="form-control" id="price_per_meter" name="price_per_meter">
                                 </div>
 
                                 <div class="form-group">
@@ -143,9 +143,6 @@
 
 @push('js')
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
-    <script src="{{asset('assets/js/vendor/dropzone.min.js')}}"></script>
-    <!-- init js -->
-    <script src="{{asset('assets/js/ui/component.fileupload.js')}}"></script>
     <script>
         $(document).ready(function () {
             $('#summernote').summernote();
@@ -154,8 +151,9 @@
     <script>
         const longitudeInput = document.getElementById('longitude');
         const latitudeInput = document.getElementById('latitude');
+        const accessToken = "<?php echo env('MAPBOX_ACCESS_TOKEN'); ?>"
 
-        mapboxgl.accessToken = 'pk.eyJ1IjoidHVhbnRhbXR1b25nIiwiYSI6ImNsZ3lpd3Y4ODBhMzEzbHBlejh1Zjc3eGYifQ.i6qdKYjYC6bof7_KDOfGQA';
+        mapboxgl.accessToken = accessToken;
         const map = new mapboxgl.Map({
             container: 'map', // container ID
             style: 'mapbox://styles/mapbox/streets-v12', // style URL
@@ -214,5 +212,31 @@
                 }
             });
         });
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('#name').on('keyup', function() {
+                const name = $(this).val();
+                const slug = slugify(name);
+                $('#slug').val(slug);
+            });
+        });
+
+        function slugify(text) {
+            const slug = text.toString().toLowerCase()
+                .replace(/[àáạảãâầấậẩẫăằắặẳẵ]/g, 'a')
+                .replace(/[èéẹẻẽêềếệểễ]/g, 'e')
+                .replace(/[ìíịỉĩ]/g, 'i')
+                .replace(/[òóọỏõôồốộổỗơờớợởỡ]/g, 'o')
+                .replace(/[ùúụủũưừứựửữ]/g, 'u')
+                .replace(/[ỳýỵỷỹ]/g, 'y')
+                .replace(/đ/g, 'd')
+                .replace(/\s+/g, '-') // Replace spaces with -
+                .replace(/[^\w\-]+/g, '') // Remove all non-word chars
+                .replace(/\-\-+/g, '-') // Replace multiple - with single -
+                .replace(/^-+/, '') // Trim - from start of text
+                .replace(/-+$/, '') // Trim - from end of text
+            return slug;
+        }
     </script>
 @endpush
