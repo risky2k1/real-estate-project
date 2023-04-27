@@ -29,7 +29,6 @@ class DatabaseSeeder extends Seeder
         }
         $users = User::all();
 
-
         $role1 = Role::create(['name' => 'Super Admin']);
         $role2 = Role::create(['name' => 'Agent']);
         $role3 = Role::create(['name' => 'Client']);
@@ -41,16 +40,16 @@ class DatabaseSeeder extends Seeder
         $role2->givePermissionTo($permission2);
         $role2->givePermissionTo($permission3);
         $role3->givePermissionTo($permission4);
-//        $admin = User::create([
-//                'name' => 'admin',
-//                'email' => 'admin@gmail.com',
-//                'phone' => '0329368007',
-//                'password' => Hash::make(config('auth.administrator.password')),
-//        ]);
-//        $admin->assignRole($role1);
         foreach ($users as $user) {
             $user->assignRole($role2) || $user->assignRole($role3);
         }
+        $admin = User::create([
+                'name' => 'admin',
+                'email' => 'admin@gmail.com',
+                'phone' => '0329368007',
+                'password' => Hash::make(config('auth.administrator.password')),
+        ]);
+        $admin->assignRole($role1);
 
     }
 }

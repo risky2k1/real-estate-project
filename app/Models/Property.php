@@ -27,5 +27,10 @@ class Property extends Model
             'is_active',
     ];
 
+    public function images()
+    {
+        return $this->hasMany(Image::class,'id','properties');
+    }
+
 
 }
