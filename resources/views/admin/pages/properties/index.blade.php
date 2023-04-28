@@ -58,7 +58,7 @@
                                     {{$property->property_type}}
                                 </td>
                                 <td>
-                                    {{$property->property_status}}
+                                    {{$property->status_name}}
                                 </td>
 
                                 <td>
@@ -80,10 +80,18 @@
                                     {{$property->bath_rooms}}
                                 </td>
                                 <td>
-                                    <input type="checkbox" class="custom-checkbox">
+                                    @if($property->furnished==1)
+                                        <span class="badge badge-success-lighten">Furnished</span>
+                                    @else
+                                        <span class="badge badge-danger-lighten">Unfurnished</span>
+                                    @endif
                                 </td>
                                 <td>
-                                    <input type="checkbox" class="custom-checkbox">
+                                    @if($property->is_active==1)
+                                        <span class="badge badge-success-lighten">Active</span>
+                                    @else
+                                        <span class="badge badge-danger-lighten">Inactive</span>
+                                    @endif
                                 </td>
 
                                 <td class="table-action">

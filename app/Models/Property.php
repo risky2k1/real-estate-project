@@ -2,8 +2,11 @@
 
 namespace App\Models;
 
+use App\Enums\PropertyStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Support\Str;
 
 class Property extends Model
 {
@@ -29,6 +32,16 @@ class Property extends Model
     protected $appends =[
             'images'
     ];
+
+    protected function statusName(): Attribute
+    {
+        return Attribute::make(
+                get: function (){
+                    return ucfirst(Str::snake(PropertyStatus::getKey($this->property_status), ' '));
+                }
+        );
+    }
+
     public function images()
     {
         return $this->hasMany(Image::class, 'property_id', 'id');
