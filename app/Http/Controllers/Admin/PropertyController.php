@@ -24,7 +24,10 @@ class PropertyController extends Controller
 
     public function index()
     {
-        return view('admin.pages.properties.index');
+        $properties = Property::get();
+        return view('admin.pages.properties.index', [
+                'properties' => $properties,
+        ]);
     }
 
     /**
@@ -59,7 +62,7 @@ class PropertyController extends Controller
         ]);
         if ($request->hasFile('image')) {
             foreach ($request->file('image') as $image) {
-                $path = Storage::disk('local')->put('properties', $image);
+                $path = Storage::disk('public')->put('properties', $image);
                 Image::create([
                         'name' => $request->image[0]->getClientOriginalName(),
                         'path' => $path,
