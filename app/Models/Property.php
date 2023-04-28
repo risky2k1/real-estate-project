@@ -26,10 +26,17 @@ class Property extends Model
             'furnished',
             'is_active',
     ];
-
+    protected $appends =[
+            'images'
+    ];
     public function images()
     {
-        return $this->hasMany(Image::class, 'id', 'properties');
+        return $this->hasMany(Image::class, 'property_id', 'id');
+    }
+
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class,'property_categories','property_id','category_id');
     }
 
 
