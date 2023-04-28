@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Enums\PropertyStatus;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class PropertyStoreRequest extends FormRequest
 {
@@ -25,8 +27,7 @@ class PropertyStoreRequest extends FormRequest
                 'name' => 'string',
                 'slug' => 'string',
                 'description' => 'string',
-                'property_type' => 'integer',
-                'property_status' => 'integer',
+                'property_status' => Rule::in(PropertyStatus::getValues()),
                 'property_price' => 'decimal:0,4',
                 'property_price_per_meter' => 'decimal:4',
                 'longitude' => 'string',

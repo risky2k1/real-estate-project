@@ -15,8 +15,7 @@ return new class extends Migration {
             $table->string('name', '255');
             $table->string('slug', '255');
             $table->text('description');
-            $table->smallInteger('property_type');//type+status = null, not setted
-            $table->smallInteger('property_status');
+            $table->smallInteger('property_status')->nullable();
             $table->decimal('property_price', '20', '2');
             $table->decimal('property_price_per_meter', '20', '2');
             $table->string('longitude', '255');
@@ -25,8 +24,8 @@ return new class extends Migration {
             $table->integer('rooms');
             $table->integer('bath_rooms');
             $table->integer('bed_rooms');
-            $table->boolean('furnished');//type+status+furnish = null, not setted
-            $table->boolean('is_active');//active too
+            $table->boolean('furnished')->nullable();
+            $table->boolean('is_active')->nullable();
             $table->timestamps();
         });
     }

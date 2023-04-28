@@ -82,13 +82,12 @@
 
                                 <div class="form-group">
                                     <label for="property_type">Property Type</label>
-                                    <select class="select2 form-control select2-multiple" id="property_type" name="property_type" data-toggle="select2" multiple="multiple"
+                                    <select class="select2 form-control select2-multiple" id="property_type" name="category" data-toggle="select2" multiple="multiple"
                                             data-placeholder="Choose ...">
                                         <optgroup label="Property Types">
-                                            <option value="1">Alaska</option>
-                                            <option value="2">Hawaii</option>
-                                            <option value="3">Hawaii</option>
-                                            <option value="4">Hawaii</option>
+                                            @foreach($categories as $category)
+                                                <option value="{{$category->id}}">{{$category->name}}</option>
+                                            @endforeach
                                         </optgroup>
                                     </select>
                                 </div>
@@ -96,11 +95,9 @@
                                 <div class="form-group">
                                     <label for="property_status">Property Status</label>
                                     <select class="form-control" id="property_status" name="property_status">
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                        <option value="5">5</option>
+                                        @foreach($statuses as $status)
+                                        <option value="{{\App\Enums\PropertyStatus::getValue($status)}}">{{ucfirst(Str::snake($status, ' '))}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
 

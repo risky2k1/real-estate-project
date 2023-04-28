@@ -2,14 +2,17 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Enums\PropertyStatus;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PropertyStoreRequest;
+use App\Models\Category;
 use App\Models\Image;
 use App\Models\Property;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Str;
 
 class PropertyController extends Controller
 {
@@ -35,7 +38,12 @@ class PropertyController extends Controller
      */
     public function create()
     {
-        return view('admin.pages.properties.create');
+        $categories = Category::get();
+        $statuses = PropertyStatus::getKeys();
+        return view('admin.pages.properties.create',[
+                'categories'=>$categories,
+                'statuses'=>$statuses,
+        ]);
     }
 
     /**
@@ -43,11 +51,11 @@ class PropertyController extends Controller
      */
     public function store(PropertyStoreRequest $request)
     {
+//        dd($request->property_status);
         $property = Property::create([
                 'name' => $request->input('name'),
                 'slug' => $request->input('slug'),
                 'description' => $request->input('description'),
-                'property_type' => $request->input('property_type'),
                 'property_status' => $request->input('property_status'),
                 'property_price' => $request->input('price'),
                 'property_price_per_meter' => $request->input('price_per_meter'),
@@ -72,6 +80,8 @@ class PropertyController extends Controller
                 ]);
             }
         }
+        $property->categories()->attach($request->input('category'));
+        return redirect()->route('admin.properties.index');
     }
 
     /**
@@ -87,7 +97,7 @@ class PropertyController extends Controller
      */
     public function edit(Property $property)
     {
-        //
+        return \view('admin.pages.properties.edit');
     }
 
     /**

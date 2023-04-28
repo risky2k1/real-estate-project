@@ -3,11 +3,10 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Category;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
-use Spatie\Permission\Models\Permission;
-use Spatie\Permission\Models\Role;
 use Spatie\Permission\PermissionRegistrar;
 
 class DatabaseSeeder extends Seeder
@@ -22,7 +21,8 @@ class DatabaseSeeder extends Seeder
         $users = User::factory(10)->create();
 
         $this->call([
-           RoleSeeder::class,
+                RoleSeeder::class,
+                CategorySeeder::class,
         ]);
         foreach ($users as $user) {
             $user->assignRole('Agent') or $user->assignRole('Client');

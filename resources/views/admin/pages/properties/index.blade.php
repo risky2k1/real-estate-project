@@ -1,7 +1,7 @@
 @extends('admin.layouts.index')
 @push('css')
-    <link href="{{asset('assets/css/vendor/dataTables.bootstrap4.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{asset('assets/css/vendor/responsive.bootstrap4.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('assets/css/vendor/dataTables.bootstrap4.css')}}" rel="stylesheet" type="text/css"/>
+    <link href="{{asset('assets/css/vendor/responsive.bootstrap4.css')}}" rel="stylesheet" type="text/css"/>
 @endpush
 
 @section('content')
@@ -26,9 +26,8 @@
                         <table class="table table-centered dt-responsive nowrap">
                             <thead class="thead-light">
                             <tr>
-                                <th>Product</th>
+                                <th>Property Information</th>
                                 <th>Category</th>
-                                <th>Type</th>
                                 <th>Status</th>
                                 <th>Price</th>
                                 <th>Location</th>
@@ -40,66 +39,68 @@
                             </thead>
                             <tbody>
                             @foreach($properties as $property)
-                            <tr>
-                                <td>
-                                    <img src="{{asset('storage').'/'.$property->images[0]->path}}" alt="contact-img" title="contact-img" class="rounded mr-3" height="48" />
-                                    <p class="m-0 d-inline-block align-middle font-16">
-                                        <a href="#" class="text-body">{{$property->name}}</a>
-                                        <br>
-                                        {{$property->slug}}
-                                        <br>
-                                        <span>{{$property->area}}m<sup>2</sup></span>
-                                    </p>
-                                </td>
-                                <td>
-                                    {{$property->categories??''}}
-                                </td>
-                                <td>
-                                    {{$property->property_type}}
-                                </td>
-                                <td>
-                                    {{$property->status_name}}
-                                </td>
+                                <tr>
+                                    <td>
+                                        @if ($property->images->count() > 0 && file_exists(public_path('storage/' . $property->images[0]->path)))
+                                            <img src="{{asset('storage').'/'.$property->images[0]->path}}" alt="contact-img" title="contact-img" class="rounded mr-3" height="48"/>
+                                        @else
+                                            <img src="{{asset('storage/meme.jpg')}}" alt="no-found" class="rounded mr-3" height="48">
+                                        @endif
+                                        <p class="m-0 d-inline-block align-middle font-16">
+                                            <a href="#" class="text-body">{{$property->name}}</a>
+                                            <br>
+                                            <span>{{$property->area}}m<sup>2</sup></span>
+                                        </p>
+                                    </td>
+                                    <td>
+                                        {{$property->categories->pluck('name')->implode(',')??''}}
+                                    </td>
+                                    <td>
+                                        {{$property->status_name}}
+                                    </td>
 
-                                <td>
-                                    {{number_format($property->property_price).' đ'}}
-                                    <br>
-                                    {{number_format($property->property_price_per_meter).' đ'}}
-                                    <br>
-                                </td>
-                                <td>
-                                    {{$property->longitude}}
-                                    <br>
-                                    {{$property->latitude}}
-                                </td>
-                                <td>
-                                    {{$property->rooms}}
-                                    <br>
-                                    {{$property->bed_rooms}}
-                                    <br>
-                                    {{$property->bath_rooms}}
-                                </td>
-                                <td>
-                                    @if($property->furnished==1)
-                                        <span class="badge badge-success-lighten">Furnished</span>
-                                    @else
-                                        <span class="badge badge-danger-lighten">Unfurnished</span>
-                                    @endif
-                                </td>
-                                <td>
-                                    @if($property->is_active==1)
-                                        <span class="badge badge-success-lighten">Active</span>
-                                    @else
-                                        <span class="badge badge-danger-lighten">Inactive</span>
-                                    @endif
-                                </td>
+                                    <td>
+                                        {{number_format($property->property_price).' đ'}}
+                                        <br>
+                                        {{number_format($property->property_price_per_meter).' đ'}}
+                                        <br>
+                                    </td>
+                                    <td>
+                                        {{$property->longitude}}
+                                        <br>
+                                        {{$property->latitude}}
+                                    </td>
+                                    <td>
+                                        <i class="mdi mdi-door"></i>
+                                        {{$property->rooms}}
+                                        <br>
+                                        <i class="mdi mdi-bed-empty"></i>
+                                        {{$property->bed_rooms}}
+                                        <br>
+                                        <i class="mdi mdi-shower"></i>
+                                        {{$property->bath_rooms}}
+                                    </td>
+                                    <td>
+                                        @if($property->furnished==1)
+                                            <span class="badge badge-success-lighten">Furnished</span>
+                                        @else
+                                            <span class="badge badge-danger-lighten">Unfurnished</span>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if($property->is_active==1)
+                                            <span class="badge badge-success-lighten">Active</span>
+                                        @else
+                                            <span class="badge badge-danger-lighten">Inactive</span>
+                                        @endif
+                                    </td>
 
-                                <td class="table-action">
-                                    <a href="javascript:void(0);" class="action-icon"> <i class="mdi mdi-eye"></i></a>
-                                    <a href="javascript:void(0);" class="action-icon"> <i class="mdi mdi-square-edit-outline"></i></a>
-                                    <a href="javascript:void(0);" class="action-icon"> <i class="mdi mdi-delete"></i></a>
-                                </td>
-                            </tr>
+                                    <td class="table-action">
+                                        <a href="javascript:void(0);" class="action-icon"> <i class="mdi mdi-eye"></i></a>
+                                        <a href="{{route('admin.properties.edit',$property)}}" class="action-icon"> <i class="mdi mdi-square-edit-outline"></i></a>
+                                        <a href="javascript:void(0);" class="action-icon"> <i class="mdi mdi-delete"></i></a>
+                                    </td>
+                                </tr>
                             @endforeach
 
                             </tbody>
