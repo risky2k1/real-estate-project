@@ -46,7 +46,7 @@
         </a>
     </li>
     <li class="side-nav-item">
-        <a href="javascript: void(0);" class="side-nav-link">
+        <a href="{{route('admin.properties.index')}}" class="side-nav-link">
             <i class="uil-home-alt"></i>
             <span> Properties </span>
         </a>
