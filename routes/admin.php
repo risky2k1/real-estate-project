@@ -30,5 +30,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
         Route::get('/', [PropertyController::class, 'index'])->name('index');
         Route::get('/create', [PropertyController::class, 'create'])->name('create');
         Route::post('/', [PropertyController::class, 'store'])->name('store');
+        Route::get('/{property}/edit', [PropertyController::class, 'edit'])->name('edit');
+        Route::delete('/{image}', [PropertyController::class, 'imageDelete'])->name('image.destroy');
     });
 });
