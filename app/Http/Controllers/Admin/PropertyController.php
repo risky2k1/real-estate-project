@@ -12,7 +12,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\View;
-use Illuminate\Support\Str;
 
 class PropertyController extends Controller
 {
@@ -40,9 +39,9 @@ class PropertyController extends Controller
     {
         $categories = Category::get();
         $statuses = PropertyStatus::getKeys();
-        return view('admin.pages.properties.create',[
-                'categories'=>$categories,
-                'statuses'=>$statuses,
+        return view('admin.pages.properties.create', [
+                'categories' => $categories,
+                'statuses' => $statuses,
         ]);
     }
 
@@ -97,7 +96,14 @@ class PropertyController extends Controller
      */
     public function edit(Property $property)
     {
-        return \view('admin.pages.properties.edit');
+        $categories = Category::get();
+        $statuses = PropertyStatus::getKeys();
+
+        return \view('admin.pages.properties.edit', [
+                'property' => $property,
+                'categories' => $categories,
+                'statuses' => $statuses,
+        ]);
     }
 
     /**
@@ -114,5 +120,10 @@ class PropertyController extends Controller
     public function destroy(Property $property)
     {
         //
+    }
+
+    public function imageDelete(Image $image)
+    {
+
     }
 }
