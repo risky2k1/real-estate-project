@@ -11,7 +11,7 @@
                 <div class="card-body">
                     <div class="row mb-2">
                         <div class="col-sm-4">
-                            <a href="{{route('admin.properties.create')}}" class="btn btn-danger mb-2"><i class="mdi mdi-plus-circle mr-2"></i> Add Products</a>
+                            <a href="{{route('admin.properties.create')}}" class="btn btn-danger mb-2"><i class="mdi mdi-plus-circle mr-2"></i> Add Property</a>
                         </div>
                         <div class="col-sm-8">
                             <div class="text-sm-right">
@@ -23,7 +23,7 @@
                     </div>
 
                     <div class="table table-responsive">
-                        <table class="table table-centered dt-responsive nowrap">
+                        <table class="table table-centered dt-responsive">
                             <thead class="thead-light">
                             <tr>
                                 <th>Property Information</th>
@@ -60,10 +60,14 @@
                                     </td>
 
                                     <td>
+                                        @if($property->status_name !=='For rent')
                                         {{number_format($property->property_price).' đ'}}
                                         <br>
                                         {{number_format($property->property_price_per_meter).' đ'}}
                                         <br>
+                                        @else
+                                            {{number_format($property->property_price).' đ / month'}}
+                                        @endif
                                     </td>
                                     <td>
                                         {{$property->longitude}}

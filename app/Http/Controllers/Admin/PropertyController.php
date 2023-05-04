@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Enums\PropertyStatus;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PropertyStoreRequest;
+use App\Http\Requests\PropertyUpdateRequest;
 use App\Models\Category;
 use App\Models\Image;
 use App\Models\Property;
@@ -109,9 +110,18 @@ class PropertyController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Property $property)
+    public function update(PropertyUpdateRequest $request, Property $property)
     {
-        //
+        try{
+            $validated = $request->validated();
+            $property->update($validated);
+            return redirect()->route('admin.properties.index');
+        }
+        catch (\Exception $exception){
+            return redirect()->back();
+    }
+
+        dd($property);
     }
 
     /**
@@ -124,6 +134,7 @@ class PropertyController extends Controller
 
     public function imageDelete(Image $image)
     {
-
+        $image->delete();
+        return redirect()->back();
     }
 }

@@ -19,8 +19,9 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <form action="{{route('admin.properties.store')}}" method="post" enctype="multipart/form-data">
+                    <form action="{{route('admin.properties.update',$property)}}" method="post" enctype="multipart/form-data">
                         @csrf
+                        @method('patch')
                         <div class="row">
                             <div class="col-xl-6">
                                 <div class="form-group">
@@ -96,7 +97,8 @@
                                     <label for="property_status">Property Status</label>
                                     <select class="form-control" id="property_status" name="property_status">
                                         @foreach($statuses as $status)
-                                            <option value="{{\App\Enums\PropertyStatus::getValue($status)}}" {{$property->property_status==\App\Enums\PropertyStatus::getValue($status)?'selected':''}}>{{ucfirst(Str::snake($status, ' '))}}</option>                                        @endforeach
+                                            <option value="{{\App\Enums\PropertyStatus::getValue($status)}}" {{$property->property_status==\App\Enums\PropertyStatus::getValue($status)?'selected':''}}>{{ucfirst(Str::snake($status, ' '))}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
 
@@ -108,15 +110,15 @@
                                 <div id="preview"></div>
                                 <div>
                                     @foreach($property->images as $image)
-{{--                                        <img src="{{asset('storage'.'/'.$image->path)}}" alt="" style="height: 64px">--}}
-                                        <div style="position: relative; display: inline-block;">
-                                            <img src="{{ asset('storage/' . $image->path) }}" alt="" style="height: 64px">
-                                            <form action="{{ route('admin.properties.image.destroy', $image) }}" method="POST" style="position: absolute; top: 0; right: 0;">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-times"></i></button>
-                                            </form>
-                                        </div>
+                                        <img src="{{asset('storage'.'/'.$image->path)}}" alt="" style="height: 64px">
+{{--                                        <div style="position: relative; display: inline-block;">--}}
+{{--                                            <img src="{{ asset('storage/' . $image->path) }}" alt="" style="height: 64px">--}}
+{{--                                            <form action="{{ route('admin.properties.imaged', $image) }}" method="POST" style="position: absolute; top: 0; right: 0;">--}}
+{{--                                                @csrf--}}
+{{--                                                @method('DELETE')--}}
+{{--                                                <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-times"></i></button>--}}
+{{--                                            </form>--}}
+{{--                                        </div>--}}
                                     @endforeach
                                 </div>
 
@@ -125,7 +127,7 @@
                             <div class="col-xl-12 form-group">
                                 <div class="form-group">
                                     <label for="summernote">Description</label>
-                                    <textarea class="form-control" id="summernote" name="description">{{$property->desription}}</textarea>
+                                    <textarea class="form-control" id="summernote" name="description">{{$property->description}}</textarea>
                                 </div>
                             </div>
 
