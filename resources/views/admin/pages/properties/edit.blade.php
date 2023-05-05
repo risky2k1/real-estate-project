@@ -111,14 +111,6 @@
                                 <div>
                                     @foreach($property->images as $image)
                                         <img src="{{asset('storage'.'/'.$image->path)}}" alt="" style="height: 64px">
-{{--                                        <div style="position: relative; display: inline-block;">--}}
-{{--                                            <img src="{{ asset('storage/' . $image->path) }}" alt="" style="height: 64px">--}}
-{{--                                            <form action="{{ route('admin.properties.imaged', $image) }}" method="POST" style="position: absolute; top: 0; right: 0;">--}}
-{{--                                                @csrf--}}
-{{--                                                @method('DELETE')--}}
-{{--                                                <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-times"></i></button>--}}
-{{--                                            </form>--}}
-{{--                                        </div>--}}
                                     @endforeach
                                 </div>
 

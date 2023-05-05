@@ -9,7 +9,6 @@ use App\Http\Requests\PropertyUpdateRequest;
 use App\Models\Category;
 use App\Models\Image;
 use App\Models\Property;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\View;
@@ -89,7 +88,9 @@ class PropertyController extends Controller
      */
     public function show(Property $property)
     {
-        //
+        return \view('admin.pages.properties.show', [
+                'property' => $property,
+        ]);
     }
 
     /**
@@ -112,14 +113,13 @@ class PropertyController extends Controller
      */
     public function update(PropertyUpdateRequest $request, Property $property)
     {
-        try{
+        try {
             $validated = $request->validated();
             $property->update($validated);
             return redirect()->route('admin.properties.index');
-        }
-        catch (\Exception $exception){
+        } catch (\Exception $exception) {
             return redirect()->back();
-    }
+        }
 
         dd($property);
     }

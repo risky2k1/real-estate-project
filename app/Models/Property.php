@@ -41,6 +41,14 @@ class Property extends Model
                 }
         );
     }
+    protected function furnishStatus(): Attribute
+    {
+        return Attribute::make(
+                get: function (){
+                   return $this->furnished == 1 ? 'Furnished': 'Unfurnished';
+                }
+        );
+    }
 
     public function images()
     {

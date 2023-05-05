@@ -100,7 +100,7 @@
                                     </td>
 
                                     <td class="table-action">
-                                        <a href="javascript:void(0);" class="action-icon"> <i class="mdi mdi-eye"></i></a>
+                                        <a href="{{route('admin.properties.show',$property)}}" class="action-icon"> <i class="mdi mdi-eye"></i></a>
                                         <a href="{{route('admin.properties.edit',$property)}}" class="action-icon"> <i class="mdi mdi-square-edit-outline"></i></a>
                                         <a href="javascript:void(0);" class="action-icon"> <i class="mdi mdi-delete"></i></a>
                                     </td>
