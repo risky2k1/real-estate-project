@@ -128,7 +128,7 @@
                                     <label for="latitude">Latitude</label>
                                     <input type="text" id="latitude" name="latitude">
                                 </div>
-                                <div id='map' style='width: 1400px; height: 300px;'></div>
+                                <div id='map' style='width: 1400px; height: 400px;'></div>
                             </div>
 
                         </div>
