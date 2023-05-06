@@ -159,7 +159,6 @@
     <script>
         const longitudeInput = document.getElementById('longitude');
         const latitudeInput = document.getElementById('latitude');
-        console.log(longitudeInput.value)
         const accessToken = "<?php echo env('MAPBOX_ACCESS_TOKEN'); ?>"
 
         mapboxgl.accessToken = accessToken;
@@ -170,7 +169,6 @@
             zoom: 16, // starting zoom
         });
         const marker = new mapboxgl.Marker({
-            color: "#FFFFFF",
             draggable: true
         }).setLngLat([longitudeInput.value, latitudeInput.value])
             .addTo(map);

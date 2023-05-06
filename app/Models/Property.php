@@ -60,5 +60,10 @@ class Property extends Model
         return $this->belongsToMany(Category::class,'property_categories','property_id','category_id');
     }
 
+    public function getCategoryNameAttribute()
+    {
+        return $this->categories()->pluck('name')->implode(',');
+    }
+
 
 }

@@ -158,13 +158,12 @@
 
         mapboxgl.accessToken = accessToken;
         const map = new mapboxgl.Map({
-            container: 'map', // container ID
-            style: 'mapbox://styles/mapbox/streets-v12', // style URL
-            center: [105.78938247915548, 20.97631900240898], // starting position [lng, lat]20.97631900240898, 105.78938247915548
-            zoom: 16, // starting zoom
+            container: 'map',
+            style: 'mapbox://styles/mapbox/streets-v12',
+            center: [105.78938247915548, 20.97631900240898],
+            zoom: 16,
         });
         const marker = new mapboxgl.Marker({
-            color: "#FFFFFF",
             draggable: true
         }).setLngLat([105.78938247915548, 20.97631900240898])
             .addTo(map);
