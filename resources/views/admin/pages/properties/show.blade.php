@@ -187,7 +187,13 @@
             draggable: true
         }).setLngLat([longitudeInput.value, latitudeInput.value])
             .addTo(map);
-
+        marker.on('drag', () => {
+            console.log('A drag event occurred.');
+        });
+        marker.on('dragend', () => {
+            console.log('A dragend event occurred.');
+            console.log(marker.getLngLat());
+        });
         let timerId = null;
 
         longitudeInput.addEventListener('input', updateMapCenterWithDelay);
@@ -210,7 +216,9 @@
             // Update the map center and marker location
             map.setCenter([longitude, latitude]);
             marker.setLngLat([longitude, latitude]);
+
         }
+
     </script>
 
 @endpush

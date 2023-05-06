@@ -12,6 +12,7 @@ return new class extends Migration {
     {
         Schema::create('properties', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->string('name', '255');
             $table->string('slug', '255');
             $table->text('description')->nullable();

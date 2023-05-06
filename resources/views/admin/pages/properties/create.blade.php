@@ -3,6 +3,8 @@
     <script src='https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js'></script>
     <link href='https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css' rel='stylesheet'/>
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.min.js"></script>
+    <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.css" type="text/css">
 @endpush
 
 @section('content')
@@ -96,7 +98,7 @@
                                     <label for="property_status">Property Status</label>
                                     <select class="form-control" id="property_status" name="property_status">
                                         @foreach($statuses as $status)
-                                        <option value="{{\App\Enums\PropertyStatus::getValue($status)}}">{{ucfirst(Str::snake($status, ' '))}}</option>
+                                            <option value="{{\App\Enums\PropertyStatus::getValue($status)}}">{{ucfirst(Str::snake($status, ' '))}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -163,11 +165,22 @@
             center: [105.78938247915548, 20.97631900240898],
             zoom: 16,
         });
-        const marker = new mapboxgl.Marker({
-            draggable: true
-        }).setLngLat([105.78938247915548, 20.97631900240898])
-            .addTo(map);
-
+        map.addControl(
+            new MapboxGeocoder({
+                accessToken: accessToken,
+                mapboxgl: mapboxgl,
+                countries: 'vn',
+            })
+        );
+        map.on('dblclick', (e) => {
+            var marker = new mapboxgl.Marker()
+                .setLngLat(e.lngLat)
+                .addTo(map);
+            const lngLat = marker.getLngLat();
+            longitudeInput.value = lngLat.lng;
+            latitudeInput.value = lngLat.lat;
+            console.log(`A dblclick event has occurred at Longitude: ${lngLat.lng}, Latitude: ${lngLat.lat}`);
+        });
         let timerId = null;
 
         longitudeInput.addEventListener('input', updateMapCenterWithDelay);

@@ -50,7 +50,7 @@ class PropertyController extends Controller
      */
     public function store(PropertyStoreRequest $request)
     {
-//        dd($request->property_status);
+//        dd($request->all());
         $property = Property::create([
                 'name' => $request->input('name'),
                 'slug' => $request->input('slug'),
