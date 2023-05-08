@@ -66,6 +66,7 @@ class PropertyController extends Controller
                 'bed_rooms' => $request->input('bed_rooms'),
                 'furnished' => $request->input('furnish'),
                 'is_active' => $request->input('active'),
+                'user_id' => Auth::user()->id,
         ]);
         if ($request->hasFile('image')) {
             foreach ($request->file('image') as $image) {
@@ -120,8 +121,6 @@ class PropertyController extends Controller
         } catch (\Exception $exception) {
             return redirect()->back();
         }
-
-        dd($property);
     }
 
     /**

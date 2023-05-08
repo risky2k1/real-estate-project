@@ -3,9 +3,9 @@
 namespace App\Models;
 
 use App\Enums\PropertyStatus;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Support\Str;
 
 class Property extends Model
@@ -28,24 +28,26 @@ class Property extends Model
             'bed_rooms',
             'furnished',
             'is_active',
+            'user_id',
     ];
-    protected $appends =[
+    protected $appends = [
             'images'
     ];
 
     protected function statusName(): Attribute
     {
         return Attribute::make(
-                get: function (){
+                get: function () {
                     return ucfirst(Str::snake(PropertyStatus::getKey($this->property_status), ' '));
                 }
         );
     }
+
     protected function furnishStatus(): Attribute
     {
         return Attribute::make(
-                get: function (){
-                   return $this->furnished == 1 ? 'Furnished': 'Unfurnished';
+                get: function () {
+                    return $this->furnished == 1 ? 'Furnished' : 'Unfurnished';
                 }
         );
     }
@@ -57,7 +59,7 @@ class Property extends Model
 
     public function categories()
     {
-        return $this->belongsToMany(Category::class,'property_categories','property_id','category_id');
+        return $this->belongsToMany(Category::class, 'property_categories', 'property_id', 'category_id');
     }
 
     public function getCategoryNameAttribute()
