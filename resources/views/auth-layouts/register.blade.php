@@ -28,10 +28,10 @@
                 <!-- Logo -->
                 <div class="auth-brand text-center text-lg-left">
                     <a href="index.html" class="logo-dark">
-                        <span><img src="assets/images/logo-dark.png" alt="" height="18"></span>
+                        <span><img src="{{asset('logo.png')}}" alt="" height="32"></span>
                     </a>
                     <a href="index.html" class="logo-light">
-                        <span><img src="assets/images/logo.png" alt="" height="18"></span>
+                        <span><img src="{{asset('logo.png')}}" alt="" height="32"></span>
                     </a>
                 </div>
 
@@ -78,7 +78,7 @@
                         </div>
                     </div>
                     <div class="form-group mb-0 text-center">
-                        <button class="btn btn-primary btn-block" type="submit"><i class="mdi mdi-account-circle"></i>
+                        <button class="btn btn-success btn-block" type="submit"><i class="mdi mdi-account-circle"></i>
                             Sign Up
                         </button>
                     </div>
