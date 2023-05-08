@@ -31,7 +31,8 @@ class Property extends Model
             'user_id',
     ];
     protected $appends = [
-            'images'
+            'images',
+            'priceMeter',
     ];
 
     protected function statusName(): Attribute
@@ -66,6 +67,16 @@ class Property extends Model
     {
         return $this->categories()->pluck('name')->implode(',');
     }
+
+//    protected function priceMeter()
+//    {
+//        return Attribute::make(
+//                get: function () {
+//                    dd($this->property_price);
+//                    return $this->property_price / $this->area;
+//                }
+//        );
+//    }
 
 
 }

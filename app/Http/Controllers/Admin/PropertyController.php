@@ -57,7 +57,7 @@ class PropertyController extends Controller
                 'description' => $request->input('description'),
                 'property_status' => $request->input('property_status'),
                 'property_price' => $request->input('price'),
-                'property_price_per_meter' => $request->input('price_per_meter'),
+//                'property_price_per_meter' => $request->input('price_per_meter'),
                 'longitude' => $request->input('longitude'),
                 'latitude' => $request->input('latitude'),
                 'area' => $request->input('area'),

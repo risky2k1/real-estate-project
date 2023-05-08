@@ -40,10 +40,10 @@
                                     <input type="text" class="form-control" id="price" name="price">
                                 </div>
 
-                                <div class="form-group">
-                                    <label for="price_per_meter">Price per meter</label>
-                                    <input type="text" class="form-control" id="price_per_meter" name="price_per_meter">
-                                </div>
+{{--                                <div class="form-group">--}}
+{{--                                    <label for="price_per_meter">Price per meter</label>--}}
+{{--                                    <input type="text" class="form-control" id="price_per_meter" name="price_per_meter">--}}
+{{--                                </div>--}}
 
                                 <div class="form-group">
                                     <label for="area">Area</label>

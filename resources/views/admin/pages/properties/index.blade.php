@@ -58,12 +58,11 @@
                                     <td>
                                         {{$property->status_name}}
                                     </td>
-
                                     <td>
                                         @if($property->status_name !=='For rent')
                                         {{number_format($property->property_price).' đ'}}
                                         <br>
-                                        {{number_format($property->property_price_per_meter).' đ'}}
+                                        {{number_format($property->property_price/$property->area).' đ/ m'}}<sup>2</sup>
                                         <br>
                                         @else
                                             {{number_format($property->property_price).' đ / month'}}
