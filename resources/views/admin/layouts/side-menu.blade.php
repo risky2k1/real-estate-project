@@ -77,27 +77,9 @@
         </ul>
     </li>
     <li class="side-nav-item">
-        <a href="#" class="side-nav-link">
-            <i class="uil-folder-plus"></i>
+        <a href="{{route('admin.sliders.index')}}" class="side-nav-link">
+            <i class="uil-home-alt"></i>
             <span> Sliders </span>
-            <span class="menu-arrow"></span>
         </a>
-        <ul class="side-nav-second-level">
-            <li class="side-nav-item">
-                <a href="#" aria-expanded="false">Plans
-                    <span class="menu-arrow"></span>
-                </a>
-                <ul class="side-nav-third-level">
-                    <li>
-                        <a href="#">All plans</a>
-                    </li>
-                    <li>
-                        <a href="javascript: void(0);">Item 2</a>
-                    </li>
-                </ul>
-            </li>
-
-        </ul>
     </li>
 </ul>
-
