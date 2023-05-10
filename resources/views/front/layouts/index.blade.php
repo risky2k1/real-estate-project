@@ -9,7 +9,7 @@
     <meta content="" name="description">
 
     <!-- Favicon -->
-    <link href="{{asset('front-assets/img/favicon.ico')}}" rel="icon">
+    <link href="{{asset('app-logo.png')}}" rel="icon">
 
     <!-- Google Web Fonts -->
     @include('front.layouts.css')
