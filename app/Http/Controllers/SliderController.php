@@ -52,7 +52,7 @@ class SliderController extends Controller
                 ]);
             }
         }
-
+        return redirect()->route('admin.sliders.index');
     }
 
     /**

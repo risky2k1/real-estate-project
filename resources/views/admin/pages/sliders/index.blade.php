@@ -80,7 +80,7 @@
                 console.log(id);
                 console.log(is_active);
                 $.ajax({
-                    url: '/admin/sliders/status-update/' + {{$slider->id}},
+                    url: '/admin/sliders/status-update/' + {{$slider->id??''}},
                     method: 'POST',
                     data: {
                         _token: '{{ csrf_token() }}',

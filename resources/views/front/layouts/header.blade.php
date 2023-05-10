@@ -8,12 +8,11 @@
         </div>
         <div class="col-md-6 animated fadeIn">
             <div class="owl-carousel header-carousel">
-                <div class="owl-carousel-item">
-                    <img class="img-fluid" src="{{asset('front-assets/img/carousel-1.jpg')}}" alt="">
-                </div>
-                <div class="owl-carousel-item">
-                    <img class="img-fluid" src="{{asset('front-assets/img/carousel-2.jpg')}}" alt="">
-                </div>
+                @foreach($sliders as $slider)
+                    <div class="owl-carousel-item">
+                        <img class="img-fluid" src="{{asset('storage/').'/'.$slider->path}}" alt="">
+                    </div>
+                @endforeach
             </div>
         </div>
     </div>

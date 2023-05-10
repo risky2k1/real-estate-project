@@ -2,6 +2,7 @@
 
 
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\PlanController;
 use App\Http\Controllers\Admin\PropertyController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
@@ -42,4 +43,13 @@ Route::middleware(['auth', 'admin'])->group(function () {
         Route::post('/status-update/{slider}', [SliderController::class, 'statusUpdate']);
         Route::delete('/{slider}', [SliderController::class, 'destroy'])->name('destroy');
     });
+    Route::prefix('plans')->name('plans.')->group(function () {
+        Route::get('/', [PlanController::class, 'index'])->name('index');
+        Route::get('/create', [PlanController::class, 'create'])->name('create');
+        Route::post('/', [PlanController::class, 'store'])->name('store');
+//        Route::get('/create-permissions', [PlanController::class, 'createPermissions'])->name('create.permissions');
+//        Route::post('/permission', [PlanController::class, 'storePermissions'])->name('store.permissions');
+//        Route::get('/{role}/edit', [PlanController::class, 'edit'])->name('edit');
+    });
+
 });
