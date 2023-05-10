@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\PropertyController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\SliderController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -33,5 +34,12 @@ Route::middleware(['auth', 'admin'])->group(function () {
         Route::get('/{property}', [PropertyController::class, 'show'])->name('show');
         Route::get('/{property}/edit', [PropertyController::class, 'edit'])->name('edit');
         Route::patch('/{property}', [PropertyController::class, 'update'])->name('update');
+    });
+    Route::prefix('sliders')->name('sliders.')->group(function (){
+       Route::get('/',[SliderController::class,'index'])->name('index');
+        Route::get('/create', [SliderController::class, 'create'])->name('create');
+        Route::post('/', [SliderController::class, 'store'])->name('store');
+        Route::post('/status-update/{slider}', [SliderController::class, 'statusUpdate']);
+        Route::delete('/{slider}', [SliderController::class, 'destroy'])->name('destroy');
     });
 });

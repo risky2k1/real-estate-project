@@ -15,8 +15,9 @@ return new class extends Migration {
             $table->string('name')->nullable();
             $table->string('path');
             $table->string('type')->nullable();
-            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
-            $table->foreignId('property_id')->constrained('properties')->cascadeOnDelete();
+            $table->string('is_active')->nullable()->default(true);
+            $table->foreignId('user_id')->nullable()->constrained('users')->cascadeOnDelete();
+            $table->foreignId('property_id')->nullable()->constrained('properties')->cascadeOnDelete();
             $table->timestamps();
         });
     }

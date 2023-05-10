@@ -2,17 +2,30 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\ImageTypeEnum;
+use App\Models\Image;
 use App\Models\Slider;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\View;
 
 class SliderController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
+    public function __construct()
+    {
+        $title = 'Slider';
+        View::share('title', $title);
+    }
+
     public function index()
     {
-        //
+        $sliders = Image::query()->where('type', ImageTypeEnum::Slider)->get();
+        return view('admin.pages.sliders.index', [
+            'sliders' => $sliders,
+        ]);
     }
 
     /**
@@ -20,7 +33,7 @@ class SliderController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.pages.sliders.create');
     }
 
     /**
@@ -28,7 +41,18 @@ class SliderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+//        dd($request->all());
+        if ($request->hasFile('slider')) {
+            foreach ($request->file('slider') as $slider) {
+                $path = Storage::disk('public')->put('sliders', $slider);
+                Image::create([
+                    'name' => $request->slider[0]->getClientOriginalName(),
+                    'path' => $path,
+                    'type' => ImageTypeEnum::Slider,
+                ]);
+            }
+        }
+
     }
 
     /**
@@ -58,8 +82,16 @@ class SliderController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Slider $slider)
+    public function destroy($slider)
     {
-        //
+        Image::find($slider)->delete();
+    }
+
+    public function statusUpdate(Request $request)
+    {
+        $slider =Image::find($request->id);
+        $slider->is_active = $request->is_active;
+        $slider->save();
+        return response()->json(['message' => 'Slider updated successfully']);
     }
 }
