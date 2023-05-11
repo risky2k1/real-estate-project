@@ -4,14 +4,21 @@
                 @csrf
                 <div class="col-md-10">
                     <div class="row g-2">
-                        <div class="col">
-                            <input type="text" name="keyword" class="form-control border-0 py-3" placeholder="Search Keyword">
+                        <div class="col-md-5">
+                            <input type="text" name="keyword" class="form-control border-0 py-3" placeholder="Từ khóa">
                         </div>
-
+                        <div class="col-md-5">
+                            <select class="form-select border-0 py-3">
+                                <option selected>Loại</option>
+                                @foreach($categories as $category)
+                                    <option value="{{$category->id}}">{{$category->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-2">
-                    <button type="submit" class="btn btn-dark border-0 w-100 py-3">Search</button>
+                    <button type="submit" class="btn btn-dark w-100 border-0 py-3">Search</button>
                 </div>
             </form>
     </div>

@@ -24,20 +24,21 @@ class PropertyStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-                'name' => 'string',
-                'slug' => 'string',
-                'description' => 'string',
-                'property_status' => Rule::in(PropertyStatus::getValues()),
-                'property_price' => 'decimal:0,4',
-                'property_price_per_meter' => 'decimal:4',
-                'longitude' => 'string',
-                'latitude' => 'string',
-                'area' => ' numeric',
-                'rooms' => ' numeric',
-                'bath_rooms' => ' numeric',
-                'bed_rooms' => ' numeric',
-                'furnished' => 'string',
-                'is_active' => 'string',
+            'name' => 'string',
+            'slug' => 'string',
+            'description' => 'string',
+            'property_status' => Rule::in(PropertyStatus::getValues()),
+            'property_price' => 'decimal:0,4',
+            'property_price_per_meter' => 'decimal:4',
+            'longitude' => 'string',
+            'latitude' => 'string',
+            'area' => ' numeric',
+            'rooms' => ' numeric',
+            'bath_rooms' => ' numeric',
+            'bed_rooms' => ' numeric',
+            'furnished' => 'string',
+            'is_active' => 'string',
+            'user_id' => 'exists:users,id'
         ];
     }
 }

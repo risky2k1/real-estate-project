@@ -41,16 +41,23 @@
                             @foreach($properties as $property)
                                 <tr>
                                     <td>
-                                        @if ($property->images->count() > 0 && file_exists(public_path('storage/' . $property->images[0]->path)))
-                                            <img src="{{asset('storage').'/'.$property->images[0]->path}}" alt="contact-img" title="contact-img" class="rounded mr-3" height="48"/>
-                                        @else
-                                            <img src="{{asset('storage/meme.jpg')}}" alt="no-found" class="rounded mr-3" height="48">
-                                        @endif
-                                        <p class="m-0 d-inline-block align-middle font-16">
-                                            <a href="#" class="text-body">{{$property->name}}</a>
-                                            <br>
-                                            <span>{{$property->area}}m<sup>2</sup></span>
-                                        </p>
+                                        <div class="d-flex">
+                                            <div style="width: 100px">
+                                                @if ($property->images->count() > 0 && file_exists(public_path('storage/' . $property->images[0]->path)))
+                                                    <img src="{{asset('storage').'/'.$property->images[0]->path}}" alt="contact-img" title="contact-img" class="rounded mr-3" height="64" width="64"/>
+                                                @else
+                                                    <img src="{{asset('storage/meme.jpg')}}" alt="no-found" class="rounded mr-3" height="48">
+                                                @endif
+                                            </div>
+                                            <div>
+                                                <p class="m-0 d-inline-block align-middle font-16">
+                                                    <a href="#" class="text-body">{{$property->name}}</a>
+                                                    <br>
+                                                    <span>{{$property->area}}m<sup>2</sup></span>
+                                                </p>
+                                            </div>
+                                        </div>
+
                                     </td>
                                     <td>
                                         {{$property->categories->pluck('name')->implode(',')??''}}

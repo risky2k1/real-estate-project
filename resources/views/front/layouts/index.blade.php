@@ -36,10 +36,8 @@
     @include('front.layouts.about')
     <!-- About End -->
 
-
-
     <!-- Category Start -->
-    @include('front.layouts.category')
+{{--    @include('front.layouts.category')--}}
     <!-- Category End -->
 
     <!-- Search Start -->

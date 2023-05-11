@@ -13,43 +13,43 @@ class Property extends Model
     use HasFactory;
 
     protected $fillable = [
-            'name',
-            'slug',
-            'description',
-            'property_type',
-            'property_status',
-            'property_price',
-            'property_price_per_meter',
-            'longitude',
-            'latitude',
-            'area',
-            'rooms',
-            'bath_rooms',
-            'bed_rooms',
-            'furnished',
-            'is_active',
-            'user_id',
+        'name',
+        'slug',
+        'description',
+        'property_type',
+        'property_status',
+        'property_price',
+        'property_price_per_meter',
+        'longitude',
+        'latitude',
+        'area',
+        'rooms',
+        'bath_rooms',
+        'bed_rooms',
+        'furnished',
+        'is_active',
+        'user_id',
     ];
     protected $appends = [
-            'images',
-            'priceMeter',
+        'images',
+        'priceMeter',
     ];
 
     protected function statusName(): Attribute
     {
         return Attribute::make(
-                get: function () {
-                    return ucfirst(Str::snake(PropertyStatus::getKey($this->property_status), ' '));
-                }
+            get: function () {
+                return ucfirst(Str::snake(PropertyStatus::getKey($this->property_status), ' '));
+            }
         );
     }
 
     protected function furnishStatus(): Attribute
     {
         return Attribute::make(
-                get: function () {
-                    return $this->furnished == 1 ? 'Furnished' : 'Unfurnished';
-                }
+            get: function () {
+                return $this->furnished == 1 ? 'Furnished' : 'Unfurnished';
+            }
         );
     }
 
@@ -66,6 +66,16 @@ class Property extends Model
     public function getCategoryNameAttribute()
     {
         return $this->categories()->pluck('name')->implode(',');
+    }
+
+    protected function agentName(): Attribute
+    {
+        return Attribute::make(
+            get: function () {
+                $user = User::find($this->user_id);
+                return $user->name;
+            }
+        );
     }
 
 //    protected function priceMeter()
