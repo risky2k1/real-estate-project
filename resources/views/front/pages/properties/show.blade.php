@@ -236,10 +236,7 @@
 
     </script>
     <script>
-        // document.addEventListener("DOMContentLoaded", function() {
-        //
-        // });
-        $(document).ready(function(){
+        $(document).ready(function () {
             const phoneElement = document.querySelector('#phone-number');
             const phoneNumber = phoneElement.textContent.trim(); // get the phone number string from the <a> element's text content
             const digits = phoneNumber.replace(/\D/g, ""); // remove non-digits from the phone number string
@@ -247,11 +244,8 @@
             const startIndex = 4;
             const endIndex = 7;
             const maskedString = phoneNumber.slice(0, startIndex) + maskedDigits + phoneNumber.slice(endIndex);
-
-             const result = phoneElement.textContent = maskedString; // update the <a> element's text content with the masked phone number
+            const result = phoneElement.textContent = maskedString; // update the <a> element's text content with the masked phone number
             console.log(result);
         });
-
-
     </script>
 @endpush
