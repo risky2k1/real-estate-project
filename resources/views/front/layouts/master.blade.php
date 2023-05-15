@@ -26,13 +26,14 @@
     <!-- Navbar Start -->
     @include('front.layouts.nav-bar')
     <!-- Navbar End -->
+{{--    @include('front.layouts.about')--}}
 
     <!-- Property List Start -->
     @yield('content')
     <!-- Property List End -->
 
     <!-- Footer Start -->
-    @include('front.layouts.footer')
+{{--    @include('front.layouts.footer')--}}
     <!-- Footer End -->
 
 
