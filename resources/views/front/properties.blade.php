@@ -31,7 +31,7 @@
                         <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
                             <div class="property-item rounded overflow-hidden">
                                 <div class="position-relative overflow-hidden">
-                                    <a href="">
+                                    <a href="{{route('properties.show',$property)}}">
                                         <img class="img-fluid" src="{{asset('storage/'.$property->images[0]->path)}}" alt="" style="width: 400px;height: 300px">
                                     </a>
                                     <div class="bg-primary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">
@@ -43,7 +43,7 @@
                                 </div>
                                 <div class="p-4 pb-0">
                                     <h5 class="text-primary mb-3">{{$property->propertie_price}}</h5>
-                                    <a class="d-block h5 mb-2" href="">{{$property->name}}</a>
+                                    <a class="d-block h5 mb-2" href="{{route('properties.show',$property)}}">{{$property->name}}</a>
                                     <p><i class="fa fa-user-tie text-primary me-2"></i>{{$property->agent_name}}
                                     </p>
                                 </div>
