@@ -44,7 +44,7 @@
                                 <div class="p-4 pb-0">
                                     <h5 class="text-primary mb-3">{{$property->propertie_price}}</h5>
                                     <a class="d-block h5 mb-2" href="">{{$property->name}}</a>
-                                    <p><i class="fa fa-map-marker-alt text-primary me-2"></i>{{$property->agent_name}}
+                                    <p><i class="fa fa-user-tie text-primary me-2"></i>{{$property->agent_name}}
                                     </p>
                                 </div>
                                 <div class="d-flex border-top">
