@@ -42,9 +42,10 @@
                                     </div>
                                 </div>
                                 <div class="p-4 pb-0">
-                                    <h5 class="text-primary mb-3">{{$property->propertie_price}}</h5>
+                                    <h5 class="text-primary mb-3">{{number_format($property->property_price)}}đ</h5>
                                     <a class="d-block h5 mb-2" href="{{route('properties.show',$property)}}">{{$property->name}}</a>
-                                    <p><i class="fa fa-user-tie text-primary me-2"></i>{{$property->agent_name}}
+                                    <p>
+                                        <i class="fa fa-user-tie text-primary me-2"></i>{{$property->agent_name}}
                                     </p>
                                 </div>
                                 <div class="d-flex border-top">

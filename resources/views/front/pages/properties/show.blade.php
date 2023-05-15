@@ -35,7 +35,14 @@
                                         <!-- Product title -->
                                         <h3 class="mt-0">{{$property->name}}</h3>
                                         <p class="mb-1">Ngày đăng: {{$property->created_at}}</p>
-                                        <p class="mb-1">Người đăng: {{$property->agent_name}}</p>
+                                        <p class="mb-1">Người đăng: {{$property->agent_name}}
+                                            <span>
+                                                - nhắn tin ngay
+                                            </span>
+                                            <a href="{{url('/chatify/'.$property->user_id)}}">
+                                                <i class="fa fa-envelope text-primary me-2"></i>
+                                            </a>
+                                        </p>
                                         <p>
                                             Liên hệ ngay:
                                             @guest()
