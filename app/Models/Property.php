@@ -78,6 +78,16 @@ class Property extends Model
         );
     }
 
+    protected function agentPhone(): Attribute
+    {
+        return Attribute::make(
+            get: function () {
+                $user = User::find($this->user_id);
+                return $user->phone;
+            }
+        );
+    }
+
 //    protected function priceMeter()
 //    {
 //        return Attribute::make(
