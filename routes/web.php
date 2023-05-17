@@ -42,5 +42,6 @@ Route::middleware('auth')->group(function () {
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 
+Route::get('detail/{property}',[HomeController::class,'show'])->name('properties.show');
 
 require __DIR__.'/auth.php';
