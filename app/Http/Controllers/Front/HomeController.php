@@ -33,4 +33,11 @@ class HomeController extends Controller
         ]);
     }
 
+    public function show(Request $request, Property $property)
+    {
+        return view('front.pages.properties.show', [
+            'property' => $property,
+        ]);
+    }
+
 }

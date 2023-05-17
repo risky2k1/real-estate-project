@@ -29,6 +29,8 @@ Route::middleware('auth')->group(function () {
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
+Route::get('detail/{property}',[HomeController::class,'show'])->name('properties.show');
+
 Route::prefix('plans')->middleware('auth')->group(function (){
    Route::get('/',[PlanController::class,'index'])->name('plans.index');
 });
