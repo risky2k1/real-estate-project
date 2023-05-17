@@ -27,10 +27,10 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-            'name',
-            'email',
-            'password',
-            'phone',
+        'name',
+        'email',
+        'password',
+        'phone',
     ];
 
     /**
@@ -39,8 +39,8 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $hidden = [
-            'password',
-            'remember_token',
+        'password',
+        'remember_token',
     ];
 
     /**
@@ -49,13 +49,27 @@ class User extends Authenticatable
      * @var array<string, string>
      */
     protected $casts = [
-            'email_verified_at' => 'datetime',
+        'email_verified_at' => 'datetime',
     ];
 
     protected function avatar(): Attribute
     {
         return Attribute::make(
-                get: fn() => (new Avatar)->create($this->name)->toBase64(),
+            get: fn() => (new Avatar)->create($this->name)->toBase64(),
         );
+    }
+
+    protected function fullName(): Attribute
+    {
+        return Attribute::make(
+            get: function () {
+                return $this->first_name . ' ' . $this->last_name;
+            }
+        );
+    }
+
+    public function properties()
+    {
+        return $this->hasMany(Property::class,'user_id','id');
     }
 }

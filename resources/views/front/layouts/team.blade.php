@@ -10,9 +10,10 @@
             <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
                 <div class="team-item rounded overflow-hidden">
                     <div class="position-relative">
-                        <img class="img-fluid" src="{{asset('front-assets/img/team-1.jpg')}}" alt="">
+                        <img class="img-fluid" src="{{$agent->avatar}}" alt="">
                         <div class="position-absolute start-50 top-100 translate-middle d-flex align-items-center">
-                            <a class="btn btn-square mx-1" href=""><i class="fa fa-envelop"></i></a>
+                            <a class="btn btn-square mx-1" href="{{url('chatify/'.$agent->id)}}"><i class="fa fa-envelope"></i></a>
+                            <a class="btn btn-square mx-1" href="tel:{{$agent->phone}}"><i class="fa fa-phone"></i></a>
                         </div>
                     </div>
                     <div class="text-center p-4 mt-3">
