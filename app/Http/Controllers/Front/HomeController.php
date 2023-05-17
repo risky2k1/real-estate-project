@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Image;
 use App\Models\Property;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -16,7 +17,7 @@ class HomeController extends Controller
         $sliders = Image::where('type', ImageTypeEnum::Slider)
             ->where('is_active', true)
             ->get();
-
+        $agents = User::role('Agent')->take(4)->get();
         $categories = Category::get();
 
         $query = Property::query();
@@ -30,6 +31,7 @@ class HomeController extends Controller
             'sliders' => $sliders,
             'properties' => $properties,
             'categories' => $categories,
+            'agents' => $agents,
         ]);
     }
 
