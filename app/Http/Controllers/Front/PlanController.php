@@ -3,12 +3,16 @@
 namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use Bpuig\Subby\Models\Plan;
 
 class PlanController extends Controller
 {
     public function index()
     {
-        return view('front.pages.plans.index');
+        $plans = Plan::get();
+        return view('front.pages.plans.index', [
+            'plans' => $plans,
+        ]);
     }
+
 }

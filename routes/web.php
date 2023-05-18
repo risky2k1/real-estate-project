@@ -4,6 +4,7 @@ use App\Http\Controllers\Front\HomeController;
 use App\Http\Controllers\Front\PlanController;
 use App\Http\Controllers\Front\ProfileController as FrontProfileController;
 use App\Http\Controllers\Front\PropertyController as FrontPropertyController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -33,6 +34,7 @@ Route::middleware('auth')->group(function () {
     });
     Route::prefix('plans')->group(function (){
         Route::get('/',[PlanController::class,'index'])->name('plans.index');
+        Route::post('sub/{plan}',[PaymentController::class,'vnPay'])->name('plans.vnPay');
     });
     Route::prefix('properties')->group(function (){
         Route::get('create',[FrontPropertyController::class,'create'])->name('properties.create');
