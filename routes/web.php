@@ -35,7 +35,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/',[PlanController::class,'index'])->name('plans.index');
     });
     Route::prefix('properties')->group(function (){
-       Route::get('create',[FrontPropertyController::class,'create'])->name('properties.create');
+        Route::get('create',[FrontPropertyController::class,'create'])->name('properties.create');
+        Route::post('',[FrontPropertyController::class,'store'])->name('properties.store');
     });
 });
 

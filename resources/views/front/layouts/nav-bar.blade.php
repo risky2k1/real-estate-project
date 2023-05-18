@@ -17,9 +17,9 @@
 
             </div>
             <div class="d-flex">
-                @if(Auth::check())
-                    <a href="" class="btn btn-primary px-3 d-none d-lg-flex" style="margin-right: 20px">Add Property</a>
-                @endif
+                @role('Agent')
+                <a href="{{route('properties.create')}}" class="btn btn-primary px-3 d-none d-lg-flex" style="margin-right: 20px">Add Property</a>
+                @endrole
                 @if(!Auth::check())
                     <a href="{{route('login')}}" class="btn btn-primary px-3 d-none d-lg-flex">Login</a>
                 @else

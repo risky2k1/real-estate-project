@@ -29,7 +29,7 @@ class PropertyStoreRequest extends FormRequest
             'description' => 'string',
             'property_status' => Rule::in(PropertyStatus::getValues()),
             'property_price' => 'decimal:0,4',
-            'property_price_per_meter' => 'decimal:4',
+//            'property_price_per_meter' => 'decimal:4',
             'longitude' => 'string',
             'latitude' => 'string',
             'area' => ' numeric',
