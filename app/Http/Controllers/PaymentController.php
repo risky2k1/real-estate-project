@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 class PaymentController extends Controller
 {
-    public function vnPay(Request $request,Plan $plan)
+    public function vnPay(Request $request, Plan $plan)
     {
         $planId = $plan->id;
         $planPrice = $plan->price;
@@ -18,10 +18,10 @@ class PaymentController extends Controller
         $vnp_TmnCode = env('vn_pay_tmn');//Mã website tại VNPAY
         $vnp_HashSecret = env('vn_pay_secret'); //Chuỗi bí mật
 
-        $vnp_TxnRef = $planId.Carbon::now()->format('YmdHis'); //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
-        $vnp_OrderInfo ='thanh toán gói';
+        $vnp_TxnRef = $planId . Carbon::now()->format('YmdHis'); //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
+        $vnp_OrderInfo = 'thanh toán gói';
         $vnp_OrderType = 'thanh toán';
-        $vnp_Amount = $planPrice*23280 * 100;
+        $vnp_Amount = $planPrice * 23280 * 100;
         $vnp_Locale = 'vn';
         $vnp_BankCode = 'NCB';
         $vnp_IpAddr = $_SERVER['REMOTE_ADDR'];
@@ -66,14 +66,25 @@ class PaymentController extends Controller
 
         $vnp_Url = $vnp_Url . "?" . $query;
         if (isset($vnp_HashSecret)) {
-            $vnpSecureHash =   hash_hmac('sha512', $hashdata, $vnp_HashSecret);//
+            $vnpSecureHash = hash_hmac('sha512', $hashdata, $vnp_HashSecret);//
             $vnp_Url .= 'vnp_SecureHash=' . $vnpSecureHash;
         }
         $returnData = array('code' => '00'
         , 'message' => 'success'
         , 'data' => $vnp_Url);
         if (isset($_POST['redirect'])) {
-            Auth::user()->assignRole('Agent');
+            if (!Auth::user()->hasRole('Agent')) {
+                Auth::user()->assignRole('Agent');
+            }
+            $subscription = Auth::user()->subscription();
+            if (!$subscription) {
+                Auth::user()->newSubscription(null, $plan, 'Tạo một đăng kí', 'Người dùng đăng kí gói này');
+            } else {
+                $subscription->renew();
+            }
+            if ($subscription && $subscription->plan_id != $plan->id) {
+                $subscription->changePlan($plan);
+            }
             toastr()->success('Đăng kí thành công!');
             header('Location: ' . $vnp_Url);
             die();
