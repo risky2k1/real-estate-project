@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Bpuig\Subby\Models\Plan;
 use Bpuig\Subby\Traits\HasSubscriptions;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -70,6 +71,39 @@ class User extends Authenticatable
 
     public function properties()
     {
-        return $this->hasMany(Property::class,'user_id','id');
+        return $this->hasMany(Property::class, 'user_id', 'id');
+    }
+
+    protected function planName(): Attribute
+    {
+        return Attribute::make(
+            get: function () {
+                $planId = $this->subscriptions->pluck('plan_id');
+                $plan = Plan::find($planId);
+                return $plan->pluck('name')->implode(',');
+            }
+        );
+    }
+
+    protected function subscribeDate(): Attribute
+    {
+        return Attribute::make(
+            get: function () {
+                $subscriptions = $this->subscriptions;
+                $date = $subscriptions->pluck('created_at');
+                return $date;
+            }
+        );
+    }
+
+    protected function subscribeEnd(): Attribute
+    {
+        return Attribute::make(
+            get: function () {
+                $subscriptions = $this->subscriptions;
+                $date = $subscriptions->pluck('ends_at');
+                return $date;
+            }
+        );
     }
 }

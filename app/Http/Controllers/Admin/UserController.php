@@ -83,4 +83,12 @@ class UserController extends Controller
     {
         //
     }
+
+    public function userSub()
+    {
+        $users = User::paginate();
+        return view('admin.pages.users.user-sub',[
+            'users'=>$users,
+        ]);
+    }
 }

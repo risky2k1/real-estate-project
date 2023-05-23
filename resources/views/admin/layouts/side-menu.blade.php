@@ -25,7 +25,7 @@
                         <a href="{{route('admin.users.index')}}">All users</a>
                     </li>
                     <li>
-                        <a href="javascript: void(0);">User Subscribed</a>
+                        <a href="{{route('admin.users.sub')}}">User Subscribed</a>
                     </li>
                 </ul>
             </li>
