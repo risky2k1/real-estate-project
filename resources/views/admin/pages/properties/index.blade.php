@@ -67,10 +67,10 @@
                                     </td>
                                     <td>
                                         @if($property->status_name !=='For rent')
-                                        {{number_format($property->property_price).' đ'}}
-                                        <br>
-                                        {{number_format($property->property_price/$property->area).' đ/ m'}}<sup>2</sup>
-                                        <br>
+                                            {{number_format($property->property_price).' đ'}}
+                                            <br>
+                                            {{number_format($property->property_price/$property->area).' đ/ m'}}<sup>2</sup>
+                                            <br>
                                         @else
                                             {{number_format($property->property_price).' đ / month'}}
                                         @endif
@@ -99,9 +99,9 @@
                                     </td>
                                     <td>
                                         @if($property->is_active==1)
-                                            <span class="badge badge-success-lighten">Active</span>
+                                            <span class="badge_1 badge badge-success-lighten">Active</span>
                                         @else
-                                            <span class="badge badge-danger-lighten">Inactive</span>
+                                            <span class="badge_2 badge badge-danger-lighten">Inactive</span>
                                         @endif
                                     </td>
 
@@ -109,6 +109,9 @@
                                         <a href="{{route('admin.properties.show',$property)}}" class="action-icon"> <i class="mdi mdi-eye"></i></a>
                                         <a href="{{route('admin.properties.edit',$property)}}" class="action-icon"> <i class="mdi mdi-square-edit-outline"></i></a>
                                         <a href="javascript:void(0);" class="action-icon"> <i class="mdi mdi-delete"></i></a>
+                                    </td>
+                                    <td>
+                                        <input type="checkbox" class="property-checkbox" data-id="{{$property->id}}" {{$property->is_active==true?'checked':''}} >
                                     </td>
                                 </tr>
                             @endforeach
@@ -127,4 +130,41 @@
     <script src="{{asset('assets/js/vendor/dataTables.bootstrap4.js')}}"></script>
     <script src="{{asset('assets/js/vendor/dataTables.responsive.min.js')}}"></script>
     <script src="{{asset('assets/js/vendor/responsive.bootstrap4.min.js')}}"></script>
+    <script>
+        $(document).ready(function () {
+            $('.property-checkbox').change(function () {
+                let propertyId = $(this).data('id');
+                let is_active = $(this).prop("checked");
+                console.log(propertyId)
+                console.log(is_active)
+                if (is_active === true) {
+                    is_active = 1;
+                } else is_active = 0;
+                $.ajax({
+                    url: '/admin/properties/change-status',
+                    method: 'POST',
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        propertyId: propertyId,
+                        is_active: is_active,
+                    },
+                    success: function (response) {
+                        console.log(response.data);
+                        $('.badge_2').removeClass('badge-danger-lighten').addClass('badge-success-lighten');
+                        $.toast({
+                            heading: 'Thành công',
+                            text: 'Bạn vừa thay đổi trạng thái thành công',
+                            icon: 'success',
+                            loader: true,        // Change it to false to disable loader
+                            loaderBg: '#9EC600',
+                            position :'top-right',// To change the background
+                        });
+                    },
+                    error: function (response) {
+                        console.log('0000')
+                    }
+                });
+            });
+        });
+    </script>
 @endpush

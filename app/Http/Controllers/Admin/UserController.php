@@ -22,9 +22,9 @@ class UserController extends Controller
     public function index()
     {
         $users = User::orderBy('id', 'asc')
-                ->paginate(10)->withQueryString();
+            ->paginate(10)->withQueryString();
         return view('admin.pages.users.index', [
-                'users' => $users,
+            'users' => $users,
         ]);
     }
 
@@ -49,8 +49,11 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
+        $properties = $user->properties()->get();
+
         return \view('admin.pages.users.details', [
-                'user' => $user,
+            'properties' => $properties,
+            'user' => $user,
         ]);
     }
 
@@ -68,7 +71,7 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         $request->validate([
-                'email' => 'unique:users',
+            'email' => 'unique:users',
         ]);
         $user->update($request->all());
     }

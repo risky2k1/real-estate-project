@@ -9,6 +9,7 @@ use App\Http\Requests\PropertyUpdateRequest;
 use App\Models\Category;
 use App\Models\Image;
 use App\Models\Property;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\View;
@@ -28,7 +29,7 @@ class PropertyController extends Controller
     {
         $properties = Property::get();
         return view('admin.pages.properties.index', [
-                'properties' => $properties,
+            'properties' => $properties,
         ]);
     }
 
@@ -40,8 +41,8 @@ class PropertyController extends Controller
         $categories = Category::get();
         $statuses = PropertyStatus::getKeys();
         return view('admin.pages.properties.create', [
-                'categories' => $categories,
-                'statuses' => $statuses,
+            'categories' => $categories,
+            'statuses' => $statuses,
         ]);
     }
 
@@ -54,31 +55,31 @@ class PropertyController extends Controller
         $request->validated();
 
         $property = Property::create([
-                'name' => $request->input('name'),
-                'slug' => $request->input('slug'),
-                'description' => $request->input('description'),
-                'property_status' => $request->input('property_status'),
-                'property_price' => $request->input('price'),
+            'name' => $request->input('name'),
+            'slug' => $request->input('slug'),
+            'description' => $request->input('description'),
+            'property_status' => $request->input('property_status'),
+            'property_price' => $request->input('price'),
 //                'property_price_per_meter' => $request->input('price_per_meter'),
-                'longitude' => $request->input('longitude'),
-                'latitude' => $request->input('latitude'),
-                'area' => $request->input('area'),
-                'rooms' => $request->input('rooms'),
-                'bath_rooms' => $request->input('bath_rooms'),
-                'bed_rooms' => $request->input('bed_rooms'),
-                'furnished' => $request->input('furnish'),
-                'is_active' => $request->input('active'),
-                'user_id' => Auth::user()->id,
+            'longitude' => $request->input('longitude'),
+            'latitude' => $request->input('latitude'),
+            'area' => $request->input('area'),
+            'rooms' => $request->input('rooms'),
+            'bath_rooms' => $request->input('bath_rooms'),
+            'bed_rooms' => $request->input('bed_rooms'),
+            'furnished' => $request->input('furnish'),
+            'is_active' => $request->input('active'),
+            'user_id' => Auth::user()->id,
         ]);
         if ($request->hasFile('image')) {
             foreach ($request->file('image') as $image) {
                 $path = Storage::disk('public')->put('properties', $image);
                 Image::create([
-                        'name' => $request->image[0]->getClientOriginalName(),
-                        'path' => $path,
-                        'user_id' => Auth::user()->id,
-                        'type' => '1',
-                        'property_id' => $property->id,
+                    'name' => $request->image[0]->getClientOriginalName(),
+                    'path' => $path,
+                    'user_id' => Auth::user()->id,
+                    'type' => '1',
+                    'property_id' => $property->id,
                 ]);
             }
         }
@@ -92,7 +93,7 @@ class PropertyController extends Controller
     public function show(Property $property)
     {
         return \view('admin.pages.properties.show', [
-                'property' => $property,
+            'property' => $property,
         ]);
     }
 
@@ -105,9 +106,9 @@ class PropertyController extends Controller
         $statuses = PropertyStatus::getKeys();
 
         return \view('admin.pages.properties.edit', [
-                'property' => $property,
-                'categories' => $categories,
-                'statuses' => $statuses,
+            'property' => $property,
+            'categories' => $categories,
+            'statuses' => $statuses,
         ]);
     }
 
@@ -131,6 +132,15 @@ class PropertyController extends Controller
     public function destroy(Property $property)
     {
         //
+    }
+
+    public function changeStatus(Request $request)
+    {
+//        return $request->propertyId;
+        $property = Property::find($request->propertyId);
+        $property->is_active = $request->is_active;
+        $property->save();
+        return response()->json(['message' => 'Slider updated successfully']);
     }
 
     public function imageDelete(Image $image)

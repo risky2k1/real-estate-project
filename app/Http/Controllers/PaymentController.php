@@ -73,20 +73,22 @@ class PaymentController extends Controller
         , 'message' => 'success'
         , 'data' => $vnp_Url);
         if (isset($_POST['redirect'])) {
-            if (!Auth::user()->hasRole('Agent')) {
-                Auth::user()->assignRole('Agent');
-            }
-            $subscription = Auth::user()->subscription();
+            $user = Auth::user();
+
+            $subscription = $user->subscriptions;
             if (!$subscription) {
-                Auth::user()->newSubscription(null, $plan, 'Tạo một đăng kí', 'Người dùng đăng kí gói này');
+                $user->newSubscription(null, $plan, 'Tạo một đăng kí', 'Người dùng đăng kí gói này');
             } else {
-                $subscription->renew();
+                $user->subscription()->renew();
             }
-            if ($subscription && $subscription->plan_id != $plan->id) {
+            if ($user->subscription() && $user->subscription()->plan_id != $plan->id) {
                 $subscription->changePlan($plan);
             }
-            toastr()->success('Đăng kí thành công!');
+            if (!$user->hasRole('Agent')) {
+                $user->syncRoles('Agent');
+            }
             header('Location: ' . $vnp_Url);
+            toastr()->success('Đăng kí thành công!');
             die();
         } else {
             echo json_encode($returnData);

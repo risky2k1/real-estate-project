@@ -44,7 +44,7 @@
                                         <img src="{{asset('storage/'.$slider->path)}}" alt="" style="width: 300px;height: 300px">
                                     </td>
                                     <td>
-                                        <input data-id="{{$slider->id}}" type="checkbox" id="slider_checkbox" @if($slider->is_active==true) checked  @endif>
+                                        <input class="slider-checkbox" data-id="{{$slider->id}}" type="checkbox" id="slider_checkbox" @if($slider->is_active==true) checked  @endif>
                                     </td>
 
                                     <td class="table-action">
@@ -70,15 +70,15 @@
 @push('js')
     <script>
         $(document).ready(function() {
-            $('#slider_checkbox').change(function() {
+            $('.slider-checkbox').change(function() {
                 var is_active = $(this).is(':checked')
                 if (is_active==='true'){
                     is_active =1;
                 }
                 else is_active=0;
                 var id = $(this).attr('data-id');
-                console.log(id);
                 console.log(is_active);
+                console.log(id);
                 $.ajax({
                     url: '/admin/sliders/status-update/' + {{$slider->id??''}},
                     method: 'POST',

@@ -35,6 +35,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
         Route::get('/{property}', [PropertyController::class, 'show'])->name('show');
         Route::get('/{property}/edit', [PropertyController::class, 'edit'])->name('edit');
         Route::patch('/{property}', [PropertyController::class, 'update'])->name('update');
+        Route::post('change-status',[PropertyController::class,'changeStatus']);
     });
     Route::prefix('sliders')->name('sliders.')->group(function (){
        Route::get('/',[SliderController::class,'index'])->name('index');

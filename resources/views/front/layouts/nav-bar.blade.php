@@ -13,7 +13,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto">
-                <a href="index.html" class="nav-item nav-link active">Home</a>
+                <a href="{{route('home')}}" class="nav-item nav-link active">Home</a>
 
             </div>
             <div class="d-flex">

@@ -26,7 +26,7 @@ class HomeController extends Controller
             $query->where('name', 'Like', '%' . request('keyword') . '%');
         }
         $properties = $query->paginate(6);
-
+//        toastr()->success('hello');
         return view('front.properties', [
             'sliders' => $sliders,
             'properties' => $properties,
