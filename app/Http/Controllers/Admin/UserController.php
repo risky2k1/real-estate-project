@@ -86,9 +86,11 @@ class UserController extends Controller
 
     public function userSub()
     {
-        $users = User::paginate();
-        return view('admin.pages.users.user-sub',[
-            'users'=>$users,
+        $subscribedUsers = User::whereHas('subscriptions', function ($query) {
+            $query->where('ends_at', '>', now()); // Filter active subscriptions
+        })->paginate();
+        return view('admin.pages.users.user-sub', [
+            'subscribedUsers' => $subscribedUsers,
         ]);
     }
 }

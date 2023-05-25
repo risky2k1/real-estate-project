@@ -58,7 +58,7 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        @foreach($users as $user)
+                                        @foreach($subscribedUsers as $user)
                                             <tr role="row" class="odd">
                                                 <td class="dt-checkboxes-cell" tabindex="0">
                                                     {{$user->id}}
@@ -73,13 +73,13 @@
                                                     </p>
                                                 </td>
                                                 <td>
-                                                    <span class="badge badge-success">{{$user->plan_name}}</span>
+                                                    <span class="badge badge-success">{{$user->subscription()->plan->name}}</span>
                                                 </td>
                                                 <td>
-                                                    {{$user->subscribe_date}}
+                                                    {{$user->subscription()->plan->created_at}}
                                                 </td>
                                                 <td>
-                                                    {{$user->subscribe_end}}
+                                                    {{$user->subscription()->ends_at->diffInDays(now())}}
                                                 </td>
                                                 <td class="table-action">
                                                     <a href="{{route('admin.users.show',$user)}}" class="action-icon">
@@ -104,7 +104,7 @@
                                 <div class="col-sm-12 col-md-7">
                                     <div>
                                         <ul class="pagination pagination-rounded">
-                                            {{$users->links()}}
+                                            {{$subscribedUsers->links()}}
                                         </ul>
                                     </div>
                                 </div>
