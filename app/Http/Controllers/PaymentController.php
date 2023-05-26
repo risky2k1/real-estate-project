@@ -75,20 +75,22 @@ class PaymentController extends Controller
         if (isset($_POST['redirect'])) {
             $user = Auth::user();
 
-            $subscription = $user->subscriptions;
-            if (!$subscription) {
+            if ($user->subscriptions->first()==null) {
                 $user->newSubscription(null, $plan, 'Tạo một đăng kí', 'Người dùng đăng kí gói này');
             } else {
-                $user->subscription()->renew();
-            }
-            if ($user->subscription() && $user->subscription()->plan_id != $plan->id) {
-                $subscription->changePlan($plan);
+                $currentPlan = $user->subscription()->plan;
+                if ($currentPlan->tag === $plan->tag) {
+                    // User already has the requested plan, renew the subscription
+                    $user->subscription()->renew();
+                } else {
+                        $user->subscription()->changePlan($plan);
+
+                }
             }
             if (!$user->hasRole('Agent')) {
                 $user->syncRoles('Agent');
             }
             header('Location: ' . $vnp_Url);
-            toastr()->success('Đăng kí thành công!');
             die();
         } else {
             echo json_encode($returnData);

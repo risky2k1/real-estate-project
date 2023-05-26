@@ -41,12 +41,17 @@
                                 <ul class="nav nav-pills bg-nav-pills nav-justified mb-3">
                                     <li class="nav-item">
                                         <a href="#aboutme" data-toggle="tab" aria-expanded="false" class="nav-link rounded-0 active">
-                                            About
+                                            Thông tin
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="#plan" data-toggle="tab" aria-expanded="false" class="nav-link rounded-0">
+                                            Gói đăng kí
                                         </a>
                                     </li>
                                     <li class="nav-item">
                                         <a href="#settings" data-toggle="tab" aria-expanded="false" class="nav-link rounded-0">
-                                            Settings
+                                            Thiết lập
                                         </a>
                                     </li>
                                 </ul>
@@ -54,6 +59,9 @@
                                     <div class="tab-pane active" id="aboutme">
                                         <h5 class="mb-3 mt-4 text-uppercase"><i class="mdi mdi-cards-variant mr-1"></i>
                                             Bài đăng</h5>
+                                        @if($properties->count()==0)
+                                            <span class="text-danger">Bạn chưa có bài đăng nào cả, hãy đăng kí và bắt đầu đăng bài thôi</span>
+                                        @endif
                                         <div class="table-responsive">
                                             <table class="table table-borderless table-nowrap mb-0">
                                                 <thead class="thead-light">
@@ -69,7 +77,8 @@
                                                 @foreach($properties as $property)
                                                     <tr>
                                                         <td>{{$property->id}}</td>
-                                                        <td><img src="{{asset('storage').'/'.$property->images[0]->path}}" alt="table-user" class="mr-2 rounded-circle" width="64" height="64">{{$property->name}}
+                                                        <td><img src="{{asset('storage').'/'.$property->images[0]->path}}" alt="table-user" class="mr-2 rounded-circle" width="64"
+                                                                 height="64">{{$property->name}}
                                                         </td>
                                                         <td>{{$property->created_at}}</td>
                                                         <td>
@@ -90,7 +99,46 @@
 
                                     </div> <!-- end tab-pane -->
                                     <!-- end about me section content -->
+                                    <div class="tab-pane" id="plan">
+                                        <h5 class="mb-3 mt-4 text-uppercase"><i class="mdi mdi-cards-variant mr-1"></i>
+                                            Gói đăng kí thành viên của bạn
+                                        </h5>
+                                        <div class="table-responsive">
+                                            <table class="table table-borderless table-nowrap mb-0">
+                                                <thead class="thead-light">
+                                                <tr>
+                                                    <th>Thông tin</th>
+                                                    <th>Ngày đăng kí</th>
+                                                    <th>Thời gian còn lại</th>
+                                                    <th>Hành động</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            {{$yourPlan->name}}
+                                                        </td>
+                                                        <td>{{$yourPlan->created_at}}</td>
+                                                        <td>
+                                                            {{$user->subscription()->getSubscriptionTotalDurationIn('day').' ngày'}}
+                                                        </td>
+                                                        <td>
+                                                            <a href="" class="btn btn-warning">
+                                                                <i class="fa fa-edit"></i>
+                                                            </a>
+                                                            <a href="" class="btn btn-success">
+                                                                <i class="fa fa-plus"></i>
+                                                            </a>
+                                                            <a href="" class="btn btn-danger">
+                                                                <i class="fa fa-x">X</i>
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
 
+                                    </div>
 
                                     <div class="tab-pane" id="settings">
                                         <form>
