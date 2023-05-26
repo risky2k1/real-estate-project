@@ -27,4 +27,11 @@ class ProfileController extends Controller
             'yourPlan' => $yourPlan,
         ]);
     }
+
+    public function cancelSub()
+    {
+        $user = Auth::user();
+        $user->subscription()->cancel();
+        return redirect()->route('agents.index');
+    }
 }

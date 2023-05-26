@@ -35,6 +35,7 @@ Route::middleware('auth')->group(function () {
     Route::prefix('plans')->group(function (){
         Route::get('/',[PlanController::class,'index'])->name('plans.index');
         Route::post('sub/{plan}',[PaymentController::class,'vnPay'])->name('plans.vnPay');
+        Route::get('cancel-sub',[FrontProfileController::class,'cancelSub'])->name('plans.cancel');
     });
     Route::prefix('properties')->group(function (){
         Route::get('create',[FrontPropertyController::class,'create'])->name('properties.create');

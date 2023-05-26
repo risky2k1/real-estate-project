@@ -122,14 +122,18 @@
                                                         <td>
                                                             {{$user->subscription()->getSubscriptionTotalDurationIn('day').' ngày'}}
                                                         </td>
-                                                        <td>
-                                                            <a href="" class="btn btn-warning">
+                                                        <td class="d-flex">
+                                                            <a href="{{route('plans.index')}}" class="btn btn-warning">
                                                                 <i class="fa fa-edit"></i>
                                                             </a>
-                                                            <a href="" class="btn btn-success">
-                                                                <i class="fa fa-plus"></i>
-                                                            </a>
-                                                            <a href="" class="btn btn-danger">
+                                                            <form action="{{route('plans.vnPay',$user->subscription()->plan)}}" method="post">
+                                                                @csrf
+                                                                <button type="submit" name="redirect" class="btn btn-success">
+                                                                    <i class="fa fa-plus"></i>
+                                                                </button>
+                                                            </form>
+
+                                                            <a href="{{route('plans.cancel')}}" class="btn btn-danger">
                                                                 <i class="fa fa-x">X</i>
                                                             </a>
                                                         </td>
