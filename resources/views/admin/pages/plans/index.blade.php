@@ -8,6 +8,9 @@
                 <div class="card-body">
                     <div class="row mb-2">
                         <div class="col-sm-4">
+                            <div>
+                                <a href="{{route('admin.properties.create')}}" class="btn btn-danger mb-2"><i class="mdi mdi-plus-circle mr-2"></i> Add Plan</a>
+                            </div>
                         </div>
                         <div class="col-sm-8">
                             <div class="text-sm-right">
