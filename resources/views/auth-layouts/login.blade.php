@@ -19,7 +19,7 @@
 
 <body class="authentication-bg pb-0" data-layout-config='{"darkMode":false}'>
 
-<div class="auth-fluid">
+<div class="auth-fluid" style="background: url('{{asset('/images/hero_bg_1.jpg')}}') center !important">
     <!--Auth fluid left content -->
     <div class="auth-fluid-form-box">
         <div class="align-items-center d-flex h-100">
