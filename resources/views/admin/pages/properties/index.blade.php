@@ -35,6 +35,7 @@
                                 <th>Furnish</th>
                                 <th>Status</th>
                                 <th style="width: 85px;">Action</th>
+                                <th>Approve</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -110,7 +111,7 @@
                                         <a href="{{route('admin.properties.edit',$property)}}" class="action-icon"> <i class="mdi mdi-square-edit-outline"></i></a>
                                         <a href="javascript:void(0);" class="action-icon"> <i class="mdi mdi-delete"></i></a>
                                     </td>
-                                    <td>
+                                    <td class="text-center">
                                         <input type="checkbox" class="property-checkbox" data-id="{{$property->id}}" {{$property->is_active==true?'checked':''}} >
                                     </td>
                                 </tr>
