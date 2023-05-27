@@ -114,19 +114,20 @@
                                                 </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
+                                                <tr>
+                                                    @if($user->subscriptions->first()!=null)
                                                         <td>
-                                                            {{$yourPlan->name}}
+                                                            {{$user->subscription()->plan->name??''}}
                                                         </td>
-                                                        <td>{{$yourPlan->created_at}}</td>
+                                                        <td>{{$user->subscription()->created_at??''}}</td>
                                                         <td>
-                                                            {{$user->subscription()->getSubscriptionTotalDurationIn('day').' ngày'}}
+                                                            {{$user->subscription()->getSubscriptionTotalDurationIn('day').' ngày'??''}}
                                                         </td>
                                                         <td class="d-flex">
                                                             <a href="{{route('plans.index')}}" class="btn btn-warning">
                                                                 <i class="fa fa-edit"></i>
                                                             </a>
-                                                            <form action="{{route('plans.vnPay',$user->subscription()->plan)}}" method="post">
+                                                            <form action="{{route('plans.vnPay',$user->subscription()->plan??'')}}" method="post">
                                                                 @csrf
                                                                 <button type="submit" name="redirect" class="btn btn-success">
                                                                     <i class="fa fa-plus"></i>
@@ -137,7 +138,8 @@
                                                                 <i class="fa fa-x">X</i>
                                                             </a>
                                                         </td>
-                                                    </tr>
+                                                    @endif
+                                                </tr>
                                                 </tbody>
                                             </table>
                                         </div>

@@ -29,23 +29,25 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::prefix('agents')->group(function (){
-        Route::get('profile', [FrontProfileController::class,'index'])->name('agents.index');
+    Route::prefix('agents')->group(function () {
+        Route::get('profile', [FrontProfileController::class, 'index'])->name('agents.index');
     });
-    Route::prefix('plans')->group(function (){
-        Route::get('/',[PlanController::class,'index'])->name('plans.index');
-        Route::post('sub/{plan}',[PaymentController::class,'vnPay'])->name('plans.vnPay');
-        Route::get('cancel-sub',[FrontProfileController::class,'cancelSub'])->name('plans.cancel');
+    Route::prefix('plans')->group(function () {
+        Route::get('/', [PlanController::class, 'index'])->name('plans.index');
+        Route::post('sub/{plan}', [PaymentController::class, 'vnPay'])->name('plans.vnPay');
+        Route::get('cancel-sub', [FrontProfileController::class, 'cancelSub'])->name('plans.cancel');
     });
-    Route::prefix('properties')->group(function (){
-        Route::get('create',[FrontPropertyController::class,'create'])->name('properties.create');
-        Route::post('',[FrontPropertyController::class,'store'])->name('properties.store');
+    Route::prefix('properties')->group(function () {
+        Route::get('create', [FrontPropertyController::class, 'create'])->name('properties.create');
+        Route::post('', [FrontPropertyController::class, 'store'])->name('properties.store');
     });
 });
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 
-Route::get('detail/{property}',[HomeController::class,'show'])->name('properties.show');
-
-require __DIR__.'/auth.php';
+Route::get('detail/{property}', [HomeController::class, 'show'])->name('properties.show');
+Route::prefix('test')->group(function () {
+    Route::get('sub', [\App\Http\Controllers\TestController::class, 'sub']);
+});
+require __DIR__ . '/auth.php';

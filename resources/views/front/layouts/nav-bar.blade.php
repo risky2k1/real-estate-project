@@ -14,7 +14,7 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto">
                 <a href="{{route('home')}}" class="nav-item nav-link active">Home</a>
-
+                <a href="{{route('home')}}" class="nav-item nav-link">News</a>
             </div>
             <div class="d-flex">
                 @role('Agent')
