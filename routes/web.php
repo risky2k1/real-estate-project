@@ -47,6 +47,8 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 
 Route::get('detail/{property}', [HomeController::class, 'show'])->name('properties.show');
+Route::get('/list-property', [FrontPropertyController::class, 'listProperties'])->name('properties.list');
+Route::post('/abc', [FrontPropertyController::class, 'listProperties'])->name('properties.search');
 Route::prefix('test')->group(function () {
     Route::get('sub', [\App\Http\Controllers\TestController::class, 'sub']);
 });

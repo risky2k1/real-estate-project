@@ -1,4 +1,4 @@
-@push('css')
+{{--@push('css')--}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter:wght@700;800&display=swap" rel="stylesheet">
@@ -16,4 +16,4 @@
 
     <!-- Template Stylesheet -->
     <link href="{{asset('front-assets/css/style.css')}}" rel="stylesheet">
-@endpush
+{{--@endpush--}}

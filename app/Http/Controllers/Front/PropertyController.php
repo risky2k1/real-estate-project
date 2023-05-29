@@ -8,6 +8,7 @@ use App\Http\Requests\PropertyStoreRequest;
 use App\Models\Category;
 use App\Models\Image;
 use App\Models\Property;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
@@ -57,5 +58,24 @@ class PropertyController extends Controller
         }
         $property->categories()->attach($request->input('category'));
         return redirect()->route('agents.index');
+    }
+
+    public function listProperties(Request $request)
+    {
+
+//            dd($request->all());
+        $properties = Property::paginate(9);
+        $categories = Category::all();
+        $propertyStatuses = PropertyStatus::getKeys();
+//        dd($propertyStatuses);
+//        foreach ($propertyStatuses as $each){
+//            dump($each);
+//        }
+//            die();
+        return view('front.pages.properties.list', [
+            'properties' => $properties,
+            'categories' => $categories,
+            'propertyStatuses' => $propertyStatuses,
+        ]);
     }
 }

@@ -93,7 +93,20 @@
                                             <label for="property_status">Trạng thái</label>
                                             <select class="form-control" id="property_status" name="property_status">
                                                 @foreach($statuses as $status)
-                                                    <option value="{{\App\Enums\PropertyStatus::getValue($status)}}">{{ucfirst(Str::snake($status, ' '))}}</option>
+                                                    @switch($status)
+                                                        @case('ForRent')
+                                                            <option value="{{\App\Enums\PropertyStatus::getValue($status)}}">Cho thuê</option>
+                                                            @break
+                                                        @case('ForSale')
+                                                            <option value="{{\App\Enums\PropertyStatus::getValue($status)}}">Bán</option>
+                                                            @break
+                                                        @case('ForInvestment')
+                                                            <option value="{{\App\Enums\PropertyStatus::getValue($status)}}">Đầu tư</option>
+                                                            @break
+                                                        @case('Featured')
+                                                            <option value="{{\App\Enums\PropertyStatus::getValue($status)}}">Nổi bật</option>
+                                                            @break
+                                                    @endswitch
                                                 @endforeach
                                             </select>
                                         </div>
