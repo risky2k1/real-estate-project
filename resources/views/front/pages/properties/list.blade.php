@@ -76,16 +76,16 @@
                                         @foreach($propertyStatuses as $propertyStatus)
                                             @switch($propertyStatus)
                                                 @case('ForRent')
-                                                    <option value="{{\App\Enums\PropertyStatus::getValue($propertyStatus)}}">Cho thuê</option>
+                                                    <option value="{{PropertyStatus::getValue($propertyStatus)}}">Cho thuê</option>
                                                     @break
                                                 @case('ForSale')
-                                                    <option value="{{\App\Enums\PropertyStatus::getValue($propertyStatus)}}">Bán</option>
+                                                    <option value="{{PropertyStatus::getValue($propertyStatus)}}">Bán</option>
                                                     @break
                                                 @case('ForInvestment')
-                                                    <option value="{{\App\Enums\PropertyStatus::getValue($propertyStatus)}}">Đầu tư</option>
+                                                    <option value="{{PropertyStatus::getValue($propertyStatus)}}">Đầu tư</option>
                                                     @break
                                                 @case('Featured')
-                                                    <option value="{{\App\Enums\PropertyStatus::getValue($propertyStatus)}}">Nổi bật</option>
+                                                    <option value="{{PropertyStatus::getValue($propertyStatus)}}">Nổi bật</option>
                                                     @break
                                             @endswitch
                                         @endforeach
