@@ -36,6 +36,9 @@
                                             <h2 class="card-pricing-price">{{$plan->price}}$ <span>/ Month</span></h2>
                                             <ul class="card-pricing-features">
                                                 <li>{{$plan->getFeatureByTag('post_per_day')->value}} bài viết /tuần</li>
+                                                @if($plan->getFeatureByTag('feature_property'))
+                                                    <li>{{$plan->getFeatureByTag('feature_property')->name}}</li>
+                                                @endif
                                                 <li>Hỗ trợ 24/7</li>
                                             </ul>
                                             <form action="{{route('plans.vnPay',$plan)}}" method="post">

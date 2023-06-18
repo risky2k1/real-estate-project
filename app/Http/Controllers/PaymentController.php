@@ -77,6 +77,7 @@ class PaymentController extends Controller
 
             if ($user->subscriptions->first()==null) {
                 $user->newSubscription(null, $plan, 'Tạo một đăng kí', 'Người dùng đăng kí gói này');
+                $user->subscription()->syncPlanFeatures();
             } else {
                 $currentPlan = $user->subscription()->plan;
                 if ($currentPlan->tag === $plan->tag) {
@@ -84,7 +85,6 @@ class PaymentController extends Controller
                     $user->subscription()->renew();
                 } else {
                         $user->subscription()->changePlan($plan);
-
                 }
             }
             if (!$user->hasRole('Agent')) {

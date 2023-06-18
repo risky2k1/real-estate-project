@@ -28,7 +28,7 @@ class PropertyController extends Controller
     public function store(PropertyStoreRequest $request)
     {
         $request->validated();
-
+        $user = Auth::user();
         $property = Property::create([
             'name' => $request->input('name'),
             'slug' => $request->input('slug'),
@@ -56,6 +56,12 @@ class PropertyController extends Controller
                     'property_id' => $property->id,
                 ]);
             }
+        }
+
+        if($user->subscription()->canUseFeature('feature_property')){
+            $property->update([
+                'property_status'=>PropertyStatus::Featured,
+            ]);
         }
         $property->categories()->attach($request->input('category'));
         return redirect()->route('agents.index');

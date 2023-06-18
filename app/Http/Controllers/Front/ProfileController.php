@@ -12,7 +12,7 @@ class ProfileController extends Controller
     {
         $user = Auth::user();
         $properties = $user->properties()->get();
-        
+
         if ($request->vnp_ResponseCode && $request->vnp_ResponseCode == 00) {
             toastr()->success('Đăng kí gói thành công');
         }
