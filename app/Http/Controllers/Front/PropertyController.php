@@ -8,6 +8,7 @@ use App\Http\Requests\PropertyStoreRequest;
 use App\Models\Category;
 use App\Models\Image;
 use App\Models\Property;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -62,16 +63,31 @@ class PropertyController extends Controller
 
     public function listProperties(Request $request)
     {
-
-//            dd($request->all());
-        $properties = Property::paginate(9);
+        $propertyQuery = Property::query();
+        if ($request->keywords !== null) {
+            $propertyQuery->where('name', 'like', '%' . request('keywords') . '%');
+        }
+        if ($request->category !== null) {
+            $categoryId = $request->category;
+            $propertyQuery->whereHas('categories', function (Builder $builder) use ($categoryId) {
+                $builder->where('category_id', $categoryId);
+            })->get();
+        }
+        if ($request->status !== null) {
+            $propertyQuery->where('property_status', $request->status)->get();
+        }
+        if ($request->rooms !== null) {
+            $propertyQuery->where('rooms', $request->rooms)->get();
+        }
+        if ($request->max_area !== null) {
+            $propertyQuery->where('area', '<=', $request->max_area)->get();
+        }
+        if ($request->max_money !== null) {
+            $propertyQuery->where('property_price', '<=', $request->max_money * 1000000)->get();
+        }
+        $properties = $propertyQuery->paginate(9);
         $categories = Category::all();
         $propertyStatuses = PropertyStatus::getKeys();
-//        dd($propertyStatuses);
-//        foreach ($propertyStatuses as $each){
-//            dump($each);
-//        }
-//            die();
         return view('front.pages.properties.list', [
             'properties' => $properties,
             'categories' => $categories,

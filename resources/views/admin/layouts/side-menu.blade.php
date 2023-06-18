@@ -41,7 +41,7 @@
             </li>
         </ul>
     </li>
-    <li class="side-nav-item">
+    <li class="side-nav-item {{request()->routeIs('admin.properties.*')?'active mm-active':''}}" >
         <a href="{{route('admin.properties.index')}}" class="side-nav-link">
             <i class="uil-home-alt"></i>
             <span> Properties </span>

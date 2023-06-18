@@ -1,28 +1,36 @@
 @extends('front.layouts.index')
+@push('css')
+    <style>
+        #truncateLongTexts {
+            width: 100%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis /*This is where the magic happens*/
+        }
+    </style>
+@endpush
 @section('content')
     <div class="container-xxl py-5">
         <div class="container">
             <div class="row g-0 gx-5 align-items-end">
                 <div class="col-lg-6">
                     <div class="text-start mx-auto mb-5 wow slideInLeft" data-wow-delay="0.1s">
-                        <h1 class="mb-3">Danh sách</h1>
-                        <p>Eirmod sed ipsum dolor sit rebum labore magna erat. Tempor ut dolore lorem kasd vero ipsum
-                            sit eirmod sit diam justo sed rebum.</p>
+                        <h1 class="mb-3">Danh sách nổi bật</h1>
                     </div>
                 </div>
-                <div class="col-lg-6 text-start text-lg-end wow slideInRight" data-wow-delay="0.1s">
-                    <ul class="nav nav-pills d-inline-flex justify-content-end mb-5">
-                        <li class="nav-item me-2">
-                            <a class="btn btn-outline-primary active" data-bs-toggle="pill" href="#tab-1">Featured</a>
-                        </li>
-                        <li class="nav-item me-2">
-                            <a class="btn btn-outline-primary" data-bs-toggle="pill" href="#tab-2">For Sell</a>
-                        </li>
-                        <li class="nav-item me-0">
-                            <a class="btn btn-outline-primary" data-bs-toggle="pill" href="#tab-3">For Rent</a>
-                        </li>
-                    </ul>
-                </div>
+{{--                <div class="col-lg-6 text-start text-lg-end wow slideInRight" data-wow-delay="0.1s">--}}
+{{--                    <ul class="nav nav-pills d-inline-flex justify-content-end mb-5">--}}
+{{--                        <li class="nav-item me-2">--}}
+{{--                            <a class="btn btn-outline-primary active" data-bs-toggle="pill" href="#tab-1">Featured</a>--}}
+{{--                        </li>--}}
+{{--                        <li class="nav-item me-2">--}}
+{{--                            <a class="btn btn-outline-primary" data-bs-toggle="pill" href="#tab-2">For Sell</a>--}}
+{{--                        </li>--}}
+{{--                        <li class="nav-item me-0">--}}
+{{--                            <a class="btn btn-outline-primary" data-bs-toggle="pill" href="#tab-3">For Rent</a>--}}
+{{--                        </li>--}}
+{{--                    </ul>--}}
+{{--                </div>--}}
             </div>
             <div class="tab-content">
                 <div id="tab-1" class="tab-pane fade show p-0 active">
@@ -43,7 +51,7 @@
                                 </div>
                                 <div class="p-4 pb-0">
                                     <h5 class="text-primary mb-3">{{number_format($property->property_price)}}đ</h5>
-                                    <a class="d-block h5 mb-2" href="{{route('properties.show',$property)}}">{{$property->name}}</a>
+                                    <a class="d-block h5 mb-2" href="{{route('properties.show',$property)}}" id="truncateLongTexts">{{$property->name}}</a>
                                     <p>
                                         <i class="fa fa-user-tie text-primary me-2"></i>{{$property->agent_name}}
                                     </p>

@@ -49,7 +49,7 @@
                                                 <a href="tel:{{$property->agent_phone}}" id="phone-number">{{$property->agent_phone}}</a>
                                             @endguest
                                             @auth()
-                                                <a href="tel:{{$property->agent_phone}}">{{$property->agent_phone}}</a>
+                                                <a class="agent_phone">{{$property->agent_phone}}</a>
                                             @endauth
                                         </p>
                                         <!-- Product stock -->
@@ -253,6 +253,102 @@
             const maskedString = phoneNumber.slice(0, startIndex) + maskedDigits + phoneNumber.slice(endIndex);
             const result = phoneElement.textContent = maskedString; // update the <a> element's text content with the masked phone number
             console.log(result);
+        });
+    </script>
+    <script omi-sdk type="text/javascript" src="https://cdn.omicrm.com/sdk/2.0.0/sdk.min.js"></script>
+
+    <script>
+        $('.agent_phone').on('click', function () {
+            var phone = $(this).text();
+            omiSDK.makeCall(phone);
+        });
+        document.addEventListener('DOMContentLoaded', () => {
+            // Ví dụ về một số config có thể dùng khi init SDK
+            let config = {
+                theme: 'default',
+                callbacks: {
+                    register: (data) => {
+                        // Sự kiện xảy ra khi trạng thái kết nối tổng đài thay đổi
+                        console.log('register:', data);
+                    },
+                    connecting: (data) => {
+                        // Sự kiện xảy ra khi bắt đầu thực hiện cuộc gọi ra
+                        console.log('connecting:', data);
+                    },
+                    invite: (data) => {
+                        // Sự kiện xảy ra khi có cuộc gọi tới
+                        console.log('invite:', data);
+                    },
+                    inviteRejected: (data) => {
+                        // Sự kiện xảy ra khi có cuộc gọi tới, nhưng bị tự động từ chối
+                        // trong khi đang diễn ra một cuộc gọi khác
+                        console.log('inviteRejected:', data);
+                    },
+                    ringing: (data) => {
+                        // Sự kiện xảy ra khi cuộc gọi ra bắt đầu đổ chuông
+                        console.log('ringing:', data);
+                    },
+                    accepted: (data) => {
+                        // Sự kiện xảy ra khi cuộc gọi vừa được chấp nhận
+                        console.log('accepted:', data);
+                    },
+                    incall: (data) => {
+                        // Sự kiện xảy ra mỗi 1 giây sau khi cuộc gọi đã được chấp nhận
+                        console.log('incall:', data);
+                    },
+                    acceptedByOther: (data) => {
+                        // Sự kiện dùng để kiểm tra xem cuộc gọi bị kết thúc
+                        // đã được chấp nhận ở thiết bị khác hay không
+                        console.log('acceptedByOther:', data);
+                    },
+                    ended: (data) => {
+                        // Sự kiện xảy ra khi cuộc gọi kết thúc
+                        console.log('ended:', data);
+                    },
+                    holdChanged: (status) => {
+                        // Sự kiện xảy ra khi trạng thái giữ cuộc gọi thay đổi
+                        console.log('on hold:', status);
+                    },
+                    saveCallInfo: (data) => {
+                        // let { callId, note, ...formData } = data;
+                        // Sự kiện xảy ra khi cuộc gọi đã có đổ chuông hoặc cuộc gọi tới, khi user có nhập note input mặc định hoặc form input custom
+                        console.log('on save call info:', data);
+                    },
+                    infoLastCall: (data) => {
+                        // Sự kiện xảy ra khi có bật options.showInfoLastCall và SDK có get được data cho số điện thoại đang gọi
+                        console.log('on found info last call:', data);
+                    },
+                }
+            };
+            omiSDK.init(config, () => {
+                // nếu url login của bạn là: https://abc.omicall.com
+                // và số nội bộ của bạn là 100 với password là 123456
+                // thì param khi register sẽ là:
+                //omiSDK.register({
+                //    domain: 'anhtranmigroup',
+                //    username: 'anhtran.migroup@gmail.com',
+                //    password: 'Omi123456'
+                //});
+                // CẦN 3 THÔNG TIN DƯỚI ĐỂ KẾT NỐI ĐẾN MÁY CHỦ. KHÔNG CẦN APIKEY KHI LƯU CẤU HÌNH.
+                // 3 THÔNG TIN DƯỚI XEM Ở PHẦN: CẤU HÌNH => TỔNG ĐÀI => SỐ NỘI BỘ.
+                // NHẤN VÀO THÔNG TIN SỐ NỘI BỘ THÌ HIỆN POP-UP CHỨA 3 THÔNG TIN DƯỚI:
+                // domain: DOMAIN TỔNG ĐÀI
+                // username: SỐ NỘI BỘ, password: MẬT KHẨU.
+                // Với mỗi thông tin nhân viên khi thêm mới, cập nhật sẽ điền THÊM 2 thông tin(Số nội bộ, mật khẩu) trên Crm-TourKit
+
+                omiSDK.register({
+                    domain: 'anhtranmigroup',
+                    username: '101', // tương đương trường "sip_user" trong thông tin số nội bộ
+                    password: '3O555555Ghh', // Mật khẩu ứng dụng
+                });
+            });
+            // Cách khác để khai báo các SDK events:
+            //omiSDK.on('register', (data) => {
+            //    // Sự kiện xảy ra khi trạng thái kết nối tổng đài thay đổi
+            //    console.log('register:', data);
+            //});
+            //Cách khác để huỷ khai báo các SDK events:
+            //omiSDK.off('register');
         });
     </script>
 @endpush

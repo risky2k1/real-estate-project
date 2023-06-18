@@ -51,20 +51,21 @@
                 <div class="col-3">
                     <div class="card">
                         <div class="card-header">
-                            <form action="{{route('properties.list')}}">
+                            <form action="{{route('properties.list')}}" class="form-group" method="get">
+{{--                            <form action="{{route('properties.list')}}">--}}
                                 @csrf
                                 <label>
                                     <span>Tìm kiếm</span>
                                     <input type="text" name="keywords" placeholder="Nhập từ khóa">
                                 </label>
-                            </form>
+{{--                            </form>--}}
                         </div>
                         <div class="card-body">
-                            <form action="{{route('properties.search')}}" class="form-group" method="post">
-                                @csrf
+{{--                                @csrf--}}
                                 <div class="form-group">
                                     <label class="form-label" for="category">Chọn loại bất động sản</label>
-                                    <select class="js-example-basic-single js-states form-control" name="category" id="category">
+                                    <select class="js-example-basic-single js-states form-control" name="category" id="category" >
+                                        <option value=""></option>
                                         @foreach($categories as $category)
                                             <option value="{{$category->id}}">{{$category->name}}</option>
                                         @endforeach
@@ -73,7 +74,8 @@
                                 <div class="form-group">
                                     <label class="form-label" for="status">Chọn hình thức bất động sản</label>
                                     <select class="status js-states form-control" name="status" id="status">
-                                        @foreach($propertyStatuses as $propertyStatus)
+                                        <option value=""></option>
+                                    @foreach($propertyStatuses as $propertyStatus)
                                             @switch($propertyStatus)
                                                 @case('ForRent')
                                                     <option value="{{PropertyStatus::getValue($propertyStatus)}}">Cho thuê</option>
@@ -94,6 +96,7 @@
                                 <div class="form-group">
                                     <label class="form-label" for="rooms">Chọn số phòng</label>
                                     <select class="room-numbers js-states form-control" name="rooms" id="rooms">
+                                        <option value=""></option>
                                         <option value="1">1</option>
                                         <option value="2">2</option>
                                         <option value="3">3</option>
@@ -103,17 +106,17 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="areaRange">Lựa chọn diện tích:</label>
-                                    <input type="range" class="form-control-range" name="max-area" id="areaRange" min="10" max="1000" value="100" oninput="displayArea()">
+                                    <input type="range" class="form-control-range" name="max_area" id="areaRange" min="10" max="1000" value="" oninput="displayArea()">
                                     <p id="rangeValue"></p>
                                 </div>
                                 <div class="form-group">
                                     <label for="areaRange">Lựa chọn mức tiền:</label>
-                                    <input type="range" class="form-control-range" name="max-money" id="moneyRange" min="30" max="30000" step="50" oninput="displayMoney()">
+                                    <input type="range" class="form-control-range" name="max_money" id="moneyRange" min="30" max="30000" value="" step="50" oninput="displayMoney()">
                                     <p id="rangeMoney"></p>
                                 </div>
                                 <div class="text-center">
-
                                     <button type="submit" class="btn btn-success ">Lọc</button>
+                                    <a href="{{route('properties.list')}}" class="btn btn-warning ">Trở về</a>
                                 </div>
                             </form>
                         </div>

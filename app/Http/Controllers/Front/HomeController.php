@@ -25,8 +25,7 @@ class HomeController extends Controller
         if ($request->has('keyword')) {
             $query->where('name', 'Like', '%' . request('keyword') . '%');
         }
-        $properties = $query->paginate(6);
-//        toastr()->success('hello');
+        $properties = $query->where('property_status',4)->paginate(6);
         return view('front.properties', [
             'sliders' => $sliders,
             'properties' => $properties,
