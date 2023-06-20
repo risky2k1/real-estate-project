@@ -90,7 +90,7 @@
                             <a href="javascript:void(0);" class="dropdown-item">Action</a>
                         </div>
                     </div>
-                    <h4 class="header-title mb-3">Projections Vs Actuals</h4>
+                    <h4 class="header-title mb-3">Số bài đăng trong tháng</h4>
 
                     <div id="high-performing-product" class="apex-charts" data-colors="#fa6767,#e3eaef" style="min-height: 257px;">
                         <div id="apexcharts6ytkdriig" class="apexcharts-canvas apexcharts6ytkdriig apexcharts-theme-light" style="width: 791px; height: 257px;">

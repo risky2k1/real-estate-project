@@ -50,21 +50,21 @@
             <div class="row">
                 <div class="col-3">
                     <div class="card">
-                        <div class="card-header">
-                            <form action="{{route('properties.list')}}" class="form-group" method="get">
-{{--                            <form action="{{route('properties.list')}}">--}}
+                        <form action="{{route('properties.list')}}" class="form-group" method="get">
+                            <div class="card-header">
+                                {{--                            <form action="{{route('properties.list')}}">--}}
                                 @csrf
                                 <label>
                                     <span>Tìm kiếm</span>
                                     <input type="text" name="keywords" placeholder="Nhập từ khóa">
                                 </label>
-{{--                            </form>--}}
-                        </div>
-                        <div class="card-body">
-{{--                                @csrf--}}
+                                {{--                            </form>--}}
+                            </div>
+                            <div class="card-body">
+                                {{--                                @csrf--}}
                                 <div class="form-group">
                                     <label class="form-label" for="category">Chọn loại bất động sản</label>
-                                    <select class="js-example-basic-single js-states form-control" name="category" id="category" >
+                                    <select class="js-example-basic-single js-states form-control" name="category" id="category">
                                         <option value=""></option>
                                         @foreach($categories as $category)
                                             <option value="{{$category->id}}">{{$category->name}}</option>
@@ -75,7 +75,7 @@
                                     <label class="form-label" for="status">Chọn hình thức bất động sản</label>
                                     <select class="status js-states form-control" name="status" id="status">
                                         <option value=""></option>
-                                    @foreach($propertyStatuses as $propertyStatus)
+                                        @foreach($propertyStatuses as $propertyStatus)
                                             @switch($propertyStatus)
                                                 @case('ForRent')
                                                     <option value="{{PropertyStatus::getValue($propertyStatus)}}">Cho thuê</option>
@@ -105,6 +105,28 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
+                                    <label class="form-label" for="bed_room">Chọn số phòng ngủ</label>
+                                    <select class="bed-room-numbers js-states form-control" name="bed_room" id="bed_room">
+                                        <option value=""></option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="bath_room">Chọn số phòng tắm</label>
+                                    <select class="bath-room-numbers js-states form-control" name="bath_room" id="bath_room">
+                                        <option value=""></option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
                                     <label for="areaRange">Lựa chọn diện tích:</label>
                                     <input type="range" class="form-control-range" name="max_area" id="areaRange" min="10" max="1000" value="" oninput="displayArea()">
                                     <p id="rangeValue"></p>
@@ -118,51 +140,51 @@
                                     <button type="submit" class="btn btn-success ">Lọc</button>
                                     <a href="{{route('properties.list')}}" class="btn btn-warning ">Trở về</a>
                                 </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-9">
-                    {{--                    <div class="tab-content">--}}
-                    {{--                        <div id="tab-1" class="tab-pane fade show p-0 active">--}}
-                    <div class="row">
-                        @foreach($properties as $property)
-                            <div class="col-lg-4 col-md-6 wow fadeInUp g-3" data-wow-delay="0.5s">
-                                <div class="property-item rounded overflow-hidden">
-                                    <div class="position-relative overflow-hidden">
-                                        <a href="{{route('properties.show',$property)}}">
-                                            <img class="img-fluid" src="{{asset('storage/'.$property->images[0]->path)}}" alt="" style="width: 400px;height: 300px">
-                                        </a>
-                                        <div class="bg-primary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">
-                                            {{$property->status_name??''}}
-                                        </div>
-                                        <div class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">
-                                            {{$property->category_name??''}}
-                                        </div>
-                                    </div>
-                                    <div class="p-4 pb-0">
-                                        <h5 class="text-primary mb-3">{{number_format($property->property_price)}}đ</h5>
-                                        <a class="d-block h5 mb-2" href="{{route('properties.show',$property)}}" id="truncateLongTexts">{{$property->name}}</a>
-                                        <p>
-                                            <i class="fa fa-user-tie text-primary me-2"></i>{{$property->agent_name}}
-                                        </p>
-                                    </div>
-                                    <div class="d-flex border-top">
-                                        <small class="flex-fill text-center border-end py-2"><i
-                                                class="fa fa-ruler-combined text-primary me-2"></i>{{$property->area}}m<sup>2</sup></small>
-                                        <small class="flex-fill text-center border-end py-2"><i
-                                                class="fa fa-bed text-primary me-2"></i>{{$property->bed_rooms}}</small>
-                                        <small class="flex-fill text-center py-2"><i
-                                                class="fa fa-bath text-primary me-2"></i>{{$property->bath_rooms}}</small>
-                                    </div>
-                                </div>
-                            </div>
-                        @endforeach
-                        {{$properties->links()}}
+                        </form>
                     </div>
                 </div>
             </div>
+            <div class="col-9">
+                {{--                    <div class="tab-content">--}}
+                {{--                        <div id="tab-1" class="tab-pane fade show p-0 active">--}}
+                <div class="row">
+                    @foreach($properties as $property)
+                        <div class="col-lg-4 col-md-6 wow fadeInUp g-3" data-wow-delay="0.5s">
+                            <div class="property-item rounded overflow-hidden">
+                                <div class="position-relative overflow-hidden">
+                                    <a href="{{route('properties.show',$property)}}">
+                                        <img class="img-fluid" src="{{asset('storage/'.$property->images[0]->path)}}" alt="" style="width: 400px;height: 300px">
+                                    </a>
+                                    <div class="bg-primary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">
+                                        {{$property->status_name??''}}
+                                    </div>
+                                    <div class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">
+                                        {{$property->category_name??''}}
+                                    </div>
+                                </div>
+                                <div class="p-4 pb-0">
+                                    <h5 class="text-primary mb-3">{{number_format($property->property_price)}}đ</h5>
+                                    <a class="d-block h5 mb-2" href="{{route('properties.show',$property)}}" id="truncateLongTexts">{{$property->name}}</a>
+                                    <p>
+                                        <i class="fa fa-user-tie text-primary me-2"></i>{{$property->agent_name}}
+                                    </p>
+                                </div>
+                                <div class="d-flex border-top">
+                                    <small class="flex-fill text-center border-end py-2"><i
+                                            class="fa fa-ruler-combined text-primary me-2"></i>{{$property->area}}m<sup>2</sup></small>
+                                    <small class="flex-fill text-center border-end py-2"><i
+                                            class="fa fa-bed text-primary me-2"></i>{{$property->bed_rooms}}</small>
+                                    <small class="flex-fill text-center py-2"><i
+                                            class="fa fa-bath text-primary me-2"></i>{{$property->bath_rooms}}</small>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                    {{$properties->links()}}
+                </div>
+            </div>
         </div>
+    </div>
     </div>
     {{--        </div>--}}
     {{--    </div>--}}
@@ -197,6 +219,16 @@
             });
             $('.room-numbers').select2({
                 placeholder: "Chọn số phòng",
+                allowClear: true,
+                tags: true,
+            });
+            $('.bath-room-numbers').select2({
+                placeholder: "Chọn số phòng tắm",
+                allowClear: true,
+                tags: true,
+            });
+            $('.bed-room-numbers').select2({
+                placeholder: "Chọn số phòng ngủ",
                 allowClear: true,
                 tags: true,
             });

@@ -69,6 +69,7 @@ class PropertyController extends Controller
 
     public function listProperties(Request $request)
     {
+//        dd($request->all());
         $propertyQuery = Property::query();
         if ($request->keywords !== null) {
             $propertyQuery->where('name', 'like', '%' . request('keywords') . '%');
@@ -85,10 +86,16 @@ class PropertyController extends Controller
         if ($request->rooms !== null) {
             $propertyQuery->where('rooms', $request->rooms)->get();
         }
-        if ($request->max_area !== null) {
+        if ($request->bed_room !== null) {
+            $propertyQuery->where('bed_rooms', $request->bed_room)->get();
+        }
+        if ($request->bath_room !== null) {
+            $propertyQuery->where('bath_rooms', $request->bath_room)->get();
+        }
+        if ($request->max_area !== null && $request->max_area !=505) {
             $propertyQuery->where('area', '<=', $request->max_area)->get();
         }
-        if ($request->max_money !== null) {
+        if ($request->max_money !== null &&$request->max_money !=15030) {
             $propertyQuery->where('property_price', '<=', $request->max_money * 1000000)->get();
         }
         $properties = $propertyQuery->paginate(9);
